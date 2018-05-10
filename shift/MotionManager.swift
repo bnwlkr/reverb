@@ -10,11 +10,11 @@ import UIKit
 import CoreLocation
 import CoreMotion
 
-class CameraMotionManager: NSObject, CLLocationManagerDelegate {
-    let ROT_THRESH = 0.2
+class MotionManager: NSObject, CLLocationManagerDelegate {
+    let ROT_THRESH = 0.3
     var locationManager = CLLocationManager()
     var motionManager = CMMotionManager()
-    var delegate: CameraMotionManagerDelegate?
+    var delegate: MotionManagerDelegate?
     
     override init() {
         super.init()
@@ -28,13 +28,13 @@ class CameraMotionManager: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         if (motionManager.isGyroAvailable) {
-            if ((motionManager.gyroData?.rotationRate.y)! < ROT_THRESH) {
-                delegate?.takePhoto()
+            if (abs((motionManager.gyroData?.rotationRate.y)!) < ROT_THRESH) {
+                delegate?.motionManagerSample()
             }
         }
     }
 }
 
-protocol CameraMotionManagerDelegate {
-    func sample()
+protocol MotionManagerDelegate {
+    func motionManagerSample()
 }

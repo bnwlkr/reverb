@@ -7,25 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FFAD11D320A3FF1300E2EBEE /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAD11D220A3FF1300E2EBEE /* Camera.swift */; };
 		FFDE86F520A3C2A100D5EEE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE86F420A3C2A100D5EEE1 /* AppDelegate.swift */; };
-		FFDE86F720A3C2A100D5EEE1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE86F620A3C2A100D5EEE1 /* ViewController.swift */; };
+		FFDE86F720A3C2A100D5EEE1 /* CamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE86F620A3C2A100D5EEE1 /* CamViewController.swift */; };
 		FFDE86FA20A3C2A100D5EEE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDE86F820A3C2A100D5EEE1 /* Main.storyboard */; };
 		FFDE86FD20A3C2A100D5EEE1 /* shift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFDE86FB20A3C2A100D5EEE1 /* shift.xcdatamodeld */; };
 		FFDE86FF20A3C2A200D5EEE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFDE86FE20A3C2A200D5EEE1 /* Assets.xcassets */; };
 		FFDE870220A3C2A200D5EEE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDE870020A3C2A200D5EEE1 /* LaunchScreen.storyboard */; };
-		FFDE870A20A3C2B000D5EEE1 /* CameraMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE870920A3C2B000D5EEE1 /* CameraMotionManager.swift */; };
+		FFDE870A20A3C2B000D5EEE1 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE870920A3C2B000D5EEE1 /* MotionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FFAD11D220A3FF1300E2EBEE /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		FFDE86F120A3C2A100D5EEE1 /* shift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFDE86F420A3C2A100D5EEE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FFDE86F620A3C2A100D5EEE1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FFDE86F620A3C2A100D5EEE1 /* CamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamViewController.swift; sourceTree = "<group>"; };
 		FFDE86F920A3C2A100D5EEE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FFDE86FC20A3C2A100D5EEE1 /* shift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = shift.xcdatamodel; sourceTree = "<group>"; };
 		FFDE86FE20A3C2A200D5EEE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFDE870120A3C2A200D5EEE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FFDE870320A3C2A200D5EEE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FFDE870920A3C2B000D5EEE1 /* CameraMotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraMotionManager.swift; sourceTree = "<group>"; };
+		FFDE870920A3C2B000D5EEE1 /* MotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,8 +61,9 @@
 			isa = PBXGroup;
 			children = (
 				FFDE86F420A3C2A100D5EEE1 /* AppDelegate.swift */,
-				FFDE86F620A3C2A100D5EEE1 /* ViewController.swift */,
-				FFDE870920A3C2B000D5EEE1 /* CameraMotionManager.swift */,
+				FFDE86F620A3C2A100D5EEE1 /* CamViewController.swift */,
+				FFDE870920A3C2B000D5EEE1 /* MotionManager.swift */,
+				FFAD11D220A3FF1300E2EBEE /* Camera.swift */,
 				FFDE86F820A3C2A100D5EEE1 /* Main.storyboard */,
 				FFDE86FE20A3C2A200D5EEE1 /* Assets.xcassets */,
 				FFDE870020A3C2A200D5EEE1 /* LaunchScreen.storyboard */,
@@ -141,9 +144,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFDE86F720A3C2A100D5EEE1 /* ViewController.swift in Sources */,
+				FFDE86F720A3C2A100D5EEE1 /* CamViewController.swift in Sources */,
+				FFAD11D320A3FF1300E2EBEE /* Camera.swift in Sources */,
 				FFDE86F520A3C2A100D5EEE1 /* AppDelegate.swift in Sources */,
-				FFDE870A20A3C2B000D5EEE1 /* CameraMotionManager.swift in Sources */,
+				FFDE870A20A3C2B000D5EEE1 /* MotionManager.swift in Sources */,
 				FFDE86FD20A3C2A100D5EEE1 /* shift.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
