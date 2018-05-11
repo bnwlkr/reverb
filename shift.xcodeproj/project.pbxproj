@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,9 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF7CD54E20A642A40010436C /* shift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFAD11D220A3FF1300E2EBEE /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		FFD0F10920A4D318000BDFD7 /* ShiftConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftConstructor.swift; sourceTree = "<group>"; };
-		FFDE86F120A3C2A100D5EEE1 /* shift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFDE86F420A3C2A100D5EEE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFDE86F620A3C2A100D5EEE1 /* CamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamViewController.swift; sourceTree = "<group>"; };
 		FFDE86F920A3C2A100D5EEE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -45,16 +45,8 @@
 			isa = PBXGroup;
 			children = (
 				FFDE86F320A3C2A100D5EEE1 /* shift */,
-				FFDE86F220A3C2A100D5EEE1 /* Products */,
+				FF7CD54E20A642A40010436C /* shift.app */,
 			);
-			sourceTree = "<group>";
-		};
-		FFDE86F220A3C2A100D5EEE1 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FFDE86F120A3C2A100D5EEE1 /* shift.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		FFDE86F320A3C2A100D5EEE1 /* shift */ = {
@@ -90,7 +82,7 @@
 			);
 			name = shift;
 			productName = shift;
-			productReference = FFDE86F120A3C2A100D5EEE1 /* shift.app */;
+			productReference = FF7CD54E20A642A40010436C /* shift.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -105,11 +97,12 @@
 				TargetAttributes = {
 					FFDE86F020A3C2A100D5EEE1 = {
 						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = FFDE86EC20A3C2A100D5EEE1 /* Build configuration list for PBXProject "shift" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -117,7 +110,7 @@
 				Base,
 			);
 			mainGroup = FFDE86E820A3C2A100D5EEE1;
-			productRefGroup = FFDE86F220A3C2A100D5EEE1 /* Products */;
+			productRefGroup = FFDE86E820A3C2A100D5EEE1;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -282,8 +275,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -296,10 +288,7 @@
 				DEVELOPMENT_TEAM = T7ST5D3QZ2;
 				INFOPLIST_FILE = shift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bnwlkr.shift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -315,10 +304,7 @@
 				DEVELOPMENT_TEAM = T7ST5D3QZ2;
 				INFOPLIST_FILE = shift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bnwlkr.shift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

@@ -9,8 +9,8 @@
 import UIKit
 import CoreImage
 
-let NUM_IMAGES = 3
-let FPS = 16
+let NUM_IMAGES = 4
+let FPS = 15
 
 class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDelegate {
 
@@ -19,8 +19,6 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
     let camera = Camera()
     let shifter = ShiftConstructor()
     var locked = false
-    let filterContext = CIContext()
-    @IBOutlet weak var test: UIImageView!
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -31,7 +29,7 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
         camera.delegate = self
         shifter.delegate = self
         camera.setup()
-        top.alpha = 0.7
+        top.alpha = 0.6
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,9 +38,7 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
     }
     
     func cameraStream(_ image: UIImage) {
-        if (!locked) {
-            bottom.image = image
-        }
+        if (!locked) { bottom.image = image }
     }
     
     func shiftConstructorFull () {
@@ -65,10 +61,6 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
     }
     
     
-    
-    
-    
-    
-    
 }
+
 
