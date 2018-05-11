@@ -20,25 +20,31 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                                         autoreleaseFrequency: .workItem)
     var backCam: AVCaptureDevice?
     var preview: AVCaptureVideoPreviewLayer?
-    var latestImage: UIImage?
+    var latest: UIImage?
     var delegate: CameraDelegate?
     
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let image = imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
         DispatchQueue.main.async { [unowned self] in
-            self.latestImage = image
-            //self.delegate?.test(image)
-            
+            self.latest = image
+            self.delegate?.cameraStream(image)
         }
     }
     
-    func start () {
+    func setup () {
         setupCaptureSession()
         setupDevice()
         setupIO()
         setupPreviewLayer()
+    }
+    
+    func start () {
         session.startRunning()
+    }
+    
+    func stop () {
+        session.stopRunning()
     }
     
     func setupCaptureSession() {
@@ -67,7 +73,6 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         
     }
     
- 
     private func imageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
         let ciImage = CIImage(cvPixelBuffer: imageBuffer)
@@ -77,9 +82,8 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
 }
 
-
-protocol CameraDelegate {
-    func test (_ image: UIImage)
+protocol  CameraDelegate {
+    func cameraStream (_ image: UIImage)
 }
 
 
