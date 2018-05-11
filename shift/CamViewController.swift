@@ -7,11 +7,10 @@
 //
 
 import UIKit
+import CoreImage
 
-
-let SAMPLE_INTERVAL = 0.1
-let NUM_IMAGES = 5
-let FPS = 20
+let NUM_IMAGES = 3
+let FPS = 16
 
 class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDelegate {
 
@@ -20,6 +19,7 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
     let camera = Camera()
     let shifter = ShiftConstructor()
     var locked = false
+    let filterContext = CIContext()
     @IBOutlet weak var test: UIImageView!
     
     override var prefersStatusBarHidden: Bool {
@@ -31,7 +31,7 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
         camera.delegate = self
         shifter.delegate = self
         camera.setup()
-        top.alpha = 0.3
+        top.alpha = 0.7
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,7 +40,9 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
     }
     
     func cameraStream(_ image: UIImage) {
-        if (!locked) { bottom.image = image }
+        if (!locked) {
+            bottom.image = image
+        }
     }
     
     func shiftConstructorFull () {
@@ -53,7 +55,7 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if (!locked) {
             let next = camera.latest!
-            top.image = next
+            top.image = shifter.applyFilter(image1: CIImage(image: next)!, filterName: "CIEdges")
             shifter.add(image: next)
         } else {
             shifter.clear()
@@ -61,6 +63,12 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
             locked = false
         }
     }
+    
+    
+    
+    
+    
+    
     
 }
 

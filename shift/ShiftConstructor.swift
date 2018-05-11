@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import CoreFoundation
-import MobileCoreServices
+import CoreImage
 
 class ShiftConstructor: NSObject {
     private var images = [UIImage]()
     var delegate: ShiftConstructorDelegate?
+    let context = CIContext()
     
     func add(image: UIImage) {
         images.append(image)
@@ -29,6 +29,17 @@ class ShiftConstructor: NSObject {
         let duration = Double(NUM_IMAGES*2)/Double(FPS)
         return UIImage.animatedImage(with: images.reflect(), duration: duration)!
     }
+    
+    func applyFilter (image1: CIImage, filterName: String) -> UIImage {
+        let filter = CIFilter(name: filterName)
+        filter?.setValue(image1, forKey: kCIInputImageKey)
+        let result = (filter?.outputImage)!
+        let cgImage = context.createCGImage(result, from: result.extent)
+        return UIImage(cgImage: cgImage!)
+    }
+    
+    
+    
 }
 
 protocol ShiftConstructorDelegate {
