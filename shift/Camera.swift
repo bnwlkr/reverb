@@ -19,9 +19,9 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                                         attributes: [],
                                         autoreleaseFrequency: .workItem)
     var backCam: AVCaptureDevice?
-    var preview: AVCaptureVideoPreviewLayer?
     var latest: UIImage?
     var delegate: CameraDelegate?
+    var videoView: UIView!
     
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -32,11 +32,11 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
     
-    func setup () {
+    func setup (videoView: UIView) {
+        self.videoView = videoView
         setupCaptureSession()
         setupDevice()
         setupIO()
-        setupPreviewLayer()
     }
     
     func start () {
@@ -68,10 +68,31 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
         } catch {print(error)}
     }
-    
-    func setupPreviewLayer () {
-        
+
+    func focus (touchPoint: UITouch) {
+        let screenSize = videoView.bounds.size
+        let x = touchPoint.location(in: videoView).y / screenSize.height
+        let y = 1.0 - touchPoint.location(in: videoView).x / screenSize.width
+        let focusPoint = CGPoint(x: x, y: y)
+
+        if let device = backCam {
+            do {
+                try device.lockForConfiguration()
+                
+                device.focusPointOfInterest = focusPoint
+                //device.focusMode = .continuousAutoFocus
+                device.focusMode = .autoFocus
+                //device.focusMode = .locked
+                device.exposurePointOfInterest = focusPoint
+                device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
+                device.unlockForConfiguration()
+            }
+            catch {
+                // just ignore
+            }
+        }
     }
+
     
     private func imageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }

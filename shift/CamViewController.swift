@@ -7,18 +7,22 @@
 //
 
 import UIKit
-import CoreImage
+import AVFoundation
+import Photos
 
-let NUM_IMAGES = 4
-let FPS = 15
+var CAM: AVCaptureDevice!
 
 class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDelegate {
-
+    @IBOutlet weak var frameDisplay: UILabel!
+    @IBOutlet weak var plus: UIButton!
+    @IBOutlet weak var minus: UIButton!
     @IBOutlet weak var top: UIImageView!
     @IBOutlet weak var bottom: UIImageView!
+    var stepper: Stepper!
     let camera = Camera()
     let shifter = ShiftConstructor()
     var locked = false
+    var torchOn = false
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -28,13 +32,19 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
         super.viewDidLoad()
         camera.delegate = self
         shifter.delegate = self
-        camera.setup()
+        camera.setup(videoView: view)
+        stepper = Stepper(incButton: plus, decButton: minus, label: frameDisplay)
         top.alpha = 0.6
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         camera.start()
+    }
+    
+    @IBAction func frameStep(_ sender: UIStepper) {
+        let value = Int(sender.value)
+        shifter.frameCount = value
+        frameDisplay.text = String(value)
     }
     
     func cameraStream(_ image: UIImage) {
@@ -49,7 +59,7 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if (!locked) {
+        /*if (!locked) {
             let next = camera.latest!
             top.image = shifter.applyFilter(image1: CIImage(image: next)!, filterName: "CIEdges")
             shifter.add(image: next)
@@ -58,7 +68,43 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
             camera.start()
             locked = false
         }
+ */
+        camera.focus(touchPoint: touches.first!)
     }
+
+
+    @IBAction func frameUp(_ sender: UIButton) {
+        stepper.increment()
+        shifter.frameCount=stepper.value
+    }
+    
+    
+    @IBAction func frameDown(_ sender: UIButton) {
+        stepper.decrement()
+        shifter.frameCount=stepper.value
+    }
+    
+    
+    
+    @IBAction func torch(_ sender: UIButton) {
+        guard let device = AVCaptureDevice.default(for: .video) else { return }
+        if device.hasTorch {
+            do {
+                try device.lockForConfiguration()
+                if torchOn==false { device.torchMode = .on
+                    torchOn=true
+                }
+                else {
+                    device.torchMode = .off
+                    torchOn=false
+                }
+                device.unlockForConfiguration()
+            } catch { print("Torch could not be used") }
+        } else { print("Torch is not available") }
+    }
+    
+    
+    
     
     
 }

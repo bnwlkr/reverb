@@ -10,24 +10,26 @@ import UIKit
 import CoreImage
 
 class ShiftConstructor: NSObject {
-    private var images = [UIImage]()
+    let FPS = 20
+    private var frames = [UIImage]()
     var delegate: ShiftConstructorDelegate?
     let context = CIContext()
+    var frameCount = 4
     
     func add(image: UIImage) {
-        images.append(image)
-        if (images.count == NUM_IMAGES) {
+        frames.append(image)
+        if (frames.count == frameCount) {
             delegate?.shiftConstructorFull()
         }
     }
 
     func clear () {
-        images.removeAll()
+        frames.removeAll()
     }
     
     func display () -> UIImage  {
-        let duration = Double(NUM_IMAGES*2)/Double(FPS)
-        return UIImage.animatedImage(with: images.reflect(), duration: duration)!
+        let duration = Double(frameCount*2)/Double(FPS)
+        return UIImage.animatedImage(with: frames.reflect(), duration: duration)!
     }
     
     func applyFilter (image1: CIImage, filterName: String) -> UIImage {
@@ -37,9 +39,6 @@ class ShiftConstructor: NSObject {
         let cgImage = context.createCGImage(result, from: result.extent)
         return UIImage(cgImage: cgImage!)
     }
-    
-    
-    
 }
 
 protocol ShiftConstructorDelegate {
