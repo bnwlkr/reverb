@@ -10,8 +10,8 @@ import UIKit
 import CoreImage
 
 class ShiftConstructor: NSObject {
-    let FPS = 20
-    private var frames = [UIImage]()
+    let FPS = 16
+    var frames = [UIImage]()
     var delegate: ShiftConstructorDelegate?
     let context = CIContext()
     var frameCount = 4
@@ -45,13 +45,4 @@ protocol ShiftConstructorDelegate {
     func shiftConstructorFull ()
 }
 
-extension Array {
-    func reflect () -> Array<Element> {
-        var ret = Array<Element>()
-        ret.append(contentsOf: self)
-        for i in (0..<self.count).reversed() {
-            ret.append(self[i])
-        }
-        return ret
-    }
-}
+

@@ -20,4 +20,23 @@ extension CountableClosedRange {
 }
 
 
+extension Array {
+    func reflect () -> Array<Element> {
+        var ret = Array<Element>()
+        ret.append(contentsOf: self)
+        for i in (0..<self.count).reversed() {
+            ret.append(self[i])
+        }
+        return ret
+    }
+    
+    func repeated (times: Int) -> Array<Element> {
+        var ret = Array<Element>()
+        for _ in 0..<times {
+            ret.append(contentsOf: self)
+        }
+        return ret
+    }
+}
+
 
