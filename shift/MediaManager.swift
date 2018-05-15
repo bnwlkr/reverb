@@ -13,7 +13,7 @@ enum Social {
 class MediaManager: NSObject {
     func save (settings: RenderSettings, images: [UIImage]) {
         let imageAnimator = ImageAnimator(renderSettings: settings)
-        imageAnimator.images = images.reflect().repeated(times: 4)
+        imageAnimator.images = images.reflect().repeated(times: 8)
         imageAnimator.render() {
             print ("hey")
         }
@@ -27,10 +27,7 @@ class MediaManager: NSObject {
             break
         }
     }
-    
-    
-    
-    
+
 }
 
 struct RenderSettings {
@@ -63,8 +60,6 @@ struct RenderSettings {
 }
 
 class ImageAnimator {
-    
-    // Apple suggests a timescale of 600 because it's a multiple of standard video rates 24, 25, 30, 60 fps etc.
     static let kTimescale: Int32 = 600
     
     let settings: RenderSettings
@@ -81,7 +76,7 @@ class ImageAnimator {
                 PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoURL)
             }) { success, error in
                 if !success {
-                    print("Could not save video to photo library:", error)
+                    print("Could not save video to photo library:", error!)
                 }
             }
         }

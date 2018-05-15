@@ -85,11 +85,17 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
         locked = false
     }
     
+ 
+    @IBAction func switchCam(_ sender: UIButton) {
+        camera.switchCam()
+    }
     @IBAction func clack(_ sender: UIButton) {
         let next = camera.latest!
         top.image = shifter.applyFilter(image1: CIImage(image: next)!, filterName: "CIEdges")
         shifter.add(image: next)
     }
+    
+   
     
     
     @IBAction func torch(_ sender: UIButton) {

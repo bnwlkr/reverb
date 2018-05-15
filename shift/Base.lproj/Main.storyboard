@@ -34,6 +34,9 @@
                                             <constraint firstAttribute="height" constant="28" id="dgq-eH-EAJ"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="switch"/>
+                                        <connections>
+                                            <action selector="switchCam:" destination="BYZ-38-t0r" eventType="touchDown" id="qMy-r0-yIm"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oew-hb-zVx" userLabel="torch">
                                         <rect key="frame" x="12" y="15" width="32" height="35"/>
@@ -116,7 +119,7 @@
                                         </constraints>
                                         <state key="normal" title="Button" image="cancel"/>
                                         <connections>
-                                            <action selector="exitPreview:" destination="BYZ-38-t0r" eventType="touchDown" id="Ej2-uZ-Aaq"/>
+                                            <action selector="exitPreview:" destination="BYZ-38-t0r" eventType="touchDown" id="cqv-Rz-q42"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G1b-3j-Crg" userLabel="facebook">

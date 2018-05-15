@@ -14,14 +14,18 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     let session = AVCaptureSession()
     let context = CIContext()
     let videoOut = AVCaptureVideoDataOutput()
+    var connection: AVCaptureConnection!
     let dataOutputQueue = DispatchQueue(label: "video data queue",
                                         qos: .userInitiated,
                                         attributes: [],
                                         autoreleaseFrequency: .workItem)
     var backCam: AVCaptureDevice?
+    var frontCam: AVCaptureDevice?
+    var currentCam: AVCaptureDevice?
     var latest: UIImage?
     var delegate: CameraDelegate?
     var videoView: UIView!
+    
     
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -30,6 +34,7 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             self.latest = image
             self.delegate?.cameraStream(image)
         }
+
     }
     
     func setup (videoView: UIView) {
@@ -47,25 +52,46 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         session.stopRunning()
     }
     
+    func switchCam () {
+        session.removeInput(session.inputs[0])
+        if currentCam?.position == .back {
+            currentCam = frontCam
+        } else {
+            currentCam = backCam
+        }
+        do {
+            session.addInput(try AVCaptureDeviceInput(device: currentCam!))
+        } catch {print(error)}
+    }
+    
+    
     func setupCaptureSession() {
         session.sessionPreset = .high
     }
     
     func setupDevice () {
-        backCam = AVCaptureDevice.default(for: AVMediaType.video)
+        let disc = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .unspecified)
+        for device in disc.devices {
+            if device.position == .front {
+                frontCam = device
+            } else if device.position == .back {
+                backCam = device
+            }
+        }
+        currentCam = backCam // default
     }
-    
+
+
     func setupIO () {
         do {
-            let deviceInput = try AVCaptureDeviceInput(device: backCam!)
+            let deviceInput = try AVCaptureDeviceInput(device: currentCam!)
             if session.canAddInput(deviceInput) {  session.addInput(deviceInput) }
             if session.canAddOutput(videoOut) { session.addOutput(videoOut) }
             videoOut.setSampleBufferDelegate(self, queue: dataOutputQueue)
-            guard let connection = videoOut.connection(with: .video) else { return }
+            connection = videoOut.connection(with: .video)
             guard connection.isVideoOrientationSupported else { return }
             guard connection.isVideoMirroringSupported else { return }
             connection.videoOrientation = .portrait
-
         } catch {print(error)}
     }
 
@@ -78,21 +104,15 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         if let device = backCam {
             do {
                 try device.lockForConfiguration()
-                
                 device.focusPointOfInterest = focusPoint
-                //device.focusMode = .continuousAutoFocus
                 device.focusMode = .autoFocus
-                //device.focusMode = .locked
                 device.exposurePointOfInterest = focusPoint
                 device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
                 device.unlockForConfiguration()
             }
-            catch {
-                // just ignore
-            }
+            catch {print(error)}
         }
     }
-
     
     private func imageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
