@@ -25,98 +25,14 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0pg-mc-wqQ" userLabel="top">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zlF-R3-Hbr" userLabel="cameraView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sJ-Qd-1V2" userLabel="switch">
-                                        <rect key="frame" x="369" y="19" width="28" height="28"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="6sJ-Qd-1V2" secondAttribute="height" multiplier="1:1" id="Zzh-Kx-NpA"/>
-                                            <constraint firstAttribute="height" constant="28" id="dgq-eH-EAJ"/>
-                                        </constraints>
-                                        <state key="normal" title="Button" image="switch"/>
-                                        <connections>
-                                            <action selector="switchCam:" destination="BYZ-38-t0r" eventType="touchDown" id="qMy-r0-yIm"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oew-hb-zVx" userLabel="torch">
-                                        <rect key="frame" x="12" y="15" width="32" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="Vow-Wd-Sit"/>
-                                            <constraint firstAttribute="height" constant="35" id="gea-wu-x9f"/>
-                                        </constraints>
-                                        <state key="normal" title="flash" image="flash"/>
-                                        <connections>
-                                            <action selector="torch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xM4-iD-8T8"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7H-Ea-dCN" userLabel="framedisplay">
-                                        <rect key="frame" x="339" y="695" width="24" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="24" id="fyb-wl-ee1"/>
-                                            <constraint firstAttribute="height" constant="21" id="pTo-UL-BKN"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y13-sT-hyk" userLabel="plus">
-                                        <rect key="frame" x="371" y="693" width="24" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="fTh-1G-oLt"/>
-                                            <constraint firstAttribute="width" constant="24" id="nUJ-nM-wGt"/>
-                                        </constraints>
-                                        <state key="normal" image="plus"/>
-                                        <connections>
-                                            <action selector="frameUp:" destination="BYZ-38-t0r" eventType="touchDown" id="awT-KW-RyS"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwj-lL-xkj" userLabel="minus">
-                                        <rect key="frame" x="307" y="693" width="24" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="24" id="Bln-qY-DyQ"/>
-                                            <constraint firstAttribute="height" constant="24" id="QBF-FC-v0A"/>
-                                        </constraints>
-                                        <state key="normal" image="minus"/>
-                                        <connections>
-                                            <action selector="frameDown:" destination="BYZ-38-t0r" eventType="touchDown" id="a1E-Hl-f7U"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEV-Bc-LPn">
-                                        <rect key="frame" x="172" y="637" width="70" height="70"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="jEV-Bc-LPn" secondAttribute="height" multiplier="1:1" id="1AR-Xx-GL2"/>
-                                            <constraint firstAttribute="height" constant="70" id="i1B-Je-bvL"/>
-                                        </constraints>
-                                        <state key="normal" title="clack" image="clack"/>
-                                        <connections>
-                                            <action selector="clack:" destination="BYZ-38-t0r" eventType="touchDown" id="4D3-EF-uaD"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="hwj-lL-xkj" firstAttribute="trailing" secondItem="h7H-Ea-dCN" secondAttribute="trailing" constant="-32" id="1Am-kP-k1z"/>
-                                    <constraint firstAttribute="trailing" secondItem="6sJ-Qd-1V2" secondAttribute="trailing" constant="17" id="8zd-n4-mG7"/>
-                                    <constraint firstItem="hwj-lL-xkj" firstAttribute="centerY" secondItem="h7H-Ea-dCN" secondAttribute="centerY" id="AZ7-2E-nfc"/>
-                                    <constraint firstItem="6sJ-Qd-1V2" firstAttribute="top" secondItem="zlF-R3-Hbr" secondAttribute="top" constant="19" id="Ejb-gs-Osi"/>
-                                    <constraint firstAttribute="bottom" secondItem="y13-sT-hyk" secondAttribute="bottom" constant="19" id="Eul-eo-fea"/>
-                                    <constraint firstItem="h7H-Ea-dCN" firstAttribute="centerY" secondItem="y13-sT-hyk" secondAttribute="centerY" id="Yg4-iK-R6c"/>
-                                    <constraint firstItem="h7H-Ea-dCN" firstAttribute="trailing" secondItem="y13-sT-hyk" secondAttribute="trailing" constant="-32" id="ZUB-wf-Z8h"/>
-                                    <constraint firstItem="oew-hb-zVx" firstAttribute="top" secondItem="zlF-R3-Hbr" secondAttribute="top" constant="15" id="iMg-tC-Zvh"/>
-                                    <constraint firstItem="jEV-Bc-LPn" firstAttribute="centerX" secondItem="zlF-R3-Hbr" secondAttribute="centerX" id="kO3-am-Cox"/>
-                                    <constraint firstItem="oew-hb-zVx" firstAttribute="leading" secondItem="zlF-R3-Hbr" secondAttribute="leading" constant="12" id="lSl-dI-Q3C"/>
-                                    <constraint firstAttribute="trailing" secondItem="y13-sT-hyk" secondAttribute="trailing" constant="19" id="lfL-Ly-yp1"/>
-                                    <constraint firstAttribute="bottom" secondItem="jEV-Bc-LPn" secondAttribute="bottom" constant="29" id="yd4-DA-jke"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUm-w8-hpD" userLabel="preview">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="33M-x9-sW9" userLabel="exit">
-                                        <rect key="frame" x="15" y="16" width="26" height="26"/>
+                                        <rect key="frame" x="15" y="16" width="29" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="33M-x9-sW9" secondAttribute="height" multiplier="1:1" id="55h-wE-PHt"/>
-                                            <constraint firstAttribute="height" constant="26" id="Iao-Zl-cz5"/>
+                                            <constraint firstAttribute="height" constant="29" id="Iao-Zl-cz5"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="cancel"/>
                                         <connections>
@@ -149,6 +65,54 @@
                                     <constraint firstAttribute="bottom" secondItem="13U-fX-r1k" secondAttribute="bottom" constant="18" id="zO2-OL-pG1"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zlF-R3-Hbr" userLabel="cameraView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sJ-Qd-1V2" userLabel="switch">
+                                        <rect key="frame" x="357" y="19" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="6sJ-Qd-1V2" secondAttribute="height" multiplier="1:1" id="Zzh-Kx-NpA"/>
+                                            <constraint firstAttribute="height" constant="40" id="dgq-eH-EAJ"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="switch"/>
+                                        <connections>
+                                            <action selector="switchCam:" destination="BYZ-38-t0r" eventType="touchDown" id="qMy-r0-yIm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oew-hb-zVx" userLabel="torch">
+                                        <rect key="frame" x="12" y="17" width="49" height="49"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="49" id="Vow-Wd-Sit"/>
+                                            <constraint firstAttribute="height" constant="54" id="gea-wu-x9f"/>
+                                        </constraints>
+                                        <state key="normal" title="flash" image="flash"/>
+                                        <connections>
+                                            <action selector="torch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xM4-iD-8T8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEV-Bc-LPn" userLabel="fuckyou">
+                                        <rect key="frame" x="167" y="619" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="jEV-Bc-LPn" secondAttribute="height" multiplier="1:1" id="1AR-Xx-GL2"/>
+                                            <constraint firstAttribute="height" constant="80" id="i1B-Je-bvL"/>
+                                        </constraints>
+                                        <state key="normal" title="clack" image="clack0">
+                                            <color key="titleShadowColor" red="0.31907645029999998" green="0.34483539169999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clack:" destination="BYZ-38-t0r" eventType="touchDown" id="4D3-EF-uaD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="6sJ-Qd-1V2" secondAttribute="trailing" constant="17" id="8zd-n4-mG7"/>
+                                    <constraint firstItem="6sJ-Qd-1V2" firstAttribute="top" secondItem="zlF-R3-Hbr" secondAttribute="top" constant="19" id="Ejb-gs-Osi"/>
+                                    <constraint firstItem="oew-hb-zVx" firstAttribute="top" secondItem="zlF-R3-Hbr" secondAttribute="top" constant="17" id="iMg-tC-Zvh"/>
+                                    <constraint firstItem="jEV-Bc-LPn" firstAttribute="centerX" secondItem="zlF-R3-Hbr" secondAttribute="centerX" id="kO3-am-Cox"/>
+                                    <constraint firstItem="oew-hb-zVx" firstAttribute="leading" secondItem="zlF-R3-Hbr" secondAttribute="leading" constant="12" id="lSl-dI-Q3C"/>
+                                    <constraint firstAttribute="bottom" secondItem="jEV-Bc-LPn" secondAttribute="bottom" constant="37" id="yd4-DA-jke"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -174,10 +138,8 @@
                     <connections>
                         <outlet property="bottom" destination="a8P-Uf-Iru" id="cLT-y1-ru3"/>
                         <outlet property="cameraView" destination="zlF-R3-Hbr" id="9T8-zO-zet"/>
+                        <outlet property="clack" destination="jEV-Bc-LPn" id="FQ0-Lj-WeA"/>
                         <outlet property="exit" destination="33M-x9-sW9" id="GTk-n4-r1h"/>
-                        <outlet property="frameDisplay" destination="h7H-Ea-dCN" id="hIE-22-t5I"/>
-                        <outlet property="minus" destination="hwj-lL-xkj" id="v8i-6p-E48"/>
-                        <outlet property="plus" destination="y13-sT-hyk" id="AFh-c2-Ttq"/>
                         <outlet property="preview" destination="tUm-w8-hpD" id="Ufi-NN-Tct"/>
                         <outlet property="top" destination="0pg-mc-wqQ" id="JpG-Jh-iPB"/>
                         <outlet property="torch" destination="oew-hb-zVx" id="wUU-J0-uxT"/>
@@ -190,12 +152,10 @@
     </scenes>
     <resources>
         <image name="cancel" width="128" height="128"/>
-        <image name="clack" width="256" height="256"/>
+        <image name="clack0" width="128" height="128"/>
         <image name="facebook" width="128" height="128"/>
         <image name="flash" width="128" height="128"/>
         <image name="instagram" width="128" height="128"/>
-        <image name="minus" width="128" height="128"/>
-        <image name="plus" width="128" height="128"/>
         <image name="switch" width="128" height="128"/>
     </resources>
 </document>

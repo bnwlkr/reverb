@@ -12,19 +12,16 @@ import Photos
 
 class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDelegate {
  
-    
+    let clacks = [#imageLiteral(resourceName: "clack0"), #imageLiteral(resourceName: "clack1"), #imageLiteral(resourceName: "clack2"), #imageLiteral(resourceName: "clack3")]
     @IBOutlet weak var torch: UIButton!
     @IBOutlet weak var exit: UIButton!
-    @IBOutlet weak var plus: UIButton!
-    @IBOutlet weak var minus: UIButton!
     @IBOutlet weak var bottom: UIImageView!
     @IBOutlet weak var top: UIImageView!
-    @IBOutlet weak var frameDisplay: UILabel!
     @IBOutlet weak var preview: UIView!
     @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var clack: UIButton!
+    var num = 0
     
-    
-    var stepper: Stepper!
     let camera = Camera()
     let mediaManager = MediaManager()
     let shifter = ShiftConstructor()
@@ -40,7 +37,6 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         shifter.delegate = self
         camera.delegate = self
         camera.setup(videoView: view)
-        stepper = Stepper(incButton: plus, decButton: minus, label: frameDisplay)
         top.alpha = 0.6
         preview.isHidden=true
     }
@@ -49,7 +45,6 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         camera.start()
     }
     
-
     func shiftConstructorFull () {
         camera.stop()
         locked = true
@@ -68,18 +63,9 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         camera.focus(touchPoint: touches.first!)
     }
-
-    @IBAction func frameUp(_ sender: UIButton) {
-        stepper.increment()
-        shifter.frameCount=stepper.value
-    }
-    
-    @IBAction func frameDown(_ sender: UIButton) {
-        stepper.decrement()
-        shifter.frameCount=stepper.value
-    }
     
     @IBAction func exitPreview(_ sender: UIButton) {
+        clack.setImage(clacks[0], for: .normal)
         preview.isHidden=true
         cameraView.isHidden=false
         shifter.clear()
@@ -91,7 +77,12 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     @IBAction func switchCam(_ sender: UIButton) {
         camera.switchCam()
     }
+    
     @IBAction func clack(_ sender: UIButton) {
+        num += 1
+        clack.setImage(clacks[num], for: .normal)
+        clack.setNeedsDisplay()
+        sleep(1)
         let next = camera.latest!
         top.image = shifter.applyFilter(image1: CIImage(image: next)!, filterName: "CIEdges")
         shifter.add(image: next)

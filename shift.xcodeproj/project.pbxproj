@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FF4FA76320A6E9B700704107 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA76220A6E9B700704107 /* Extensions.swift */; };
-		FF4FA76920A783A400704107 /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA76820A783A400704107 /* Stepper.swift */; };
 		FF4FA76F20A9186A00704107 /* MediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA76E20A9186A00704107 /* MediaManager.swift */; };
 		FFAD11D320A3FF1300E2EBEE /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAD11D220A3FF1300E2EBEE /* Camera.swift */; };
 		FFD0F10A20A4D318000BDFD7 /* ShiftConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0F10920A4D318000BDFD7 /* ShiftConstructor.swift */; };
@@ -22,7 +21,6 @@
 
 /* Begin PBXFileReference section */
 		FF4FA76220A6E9B700704107 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		FF4FA76820A783A400704107 /* Stepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
 		FF4FA76E20A9186A00704107 /* MediaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
 		FF7CD54E20A642A40010436C /* shift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFAD11D220A3FF1300E2EBEE /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -62,7 +60,6 @@
 				FFDE86F620A3C2A100D5EEE1 /* CamViewController.swift */,
 				FFD0F10920A4D318000BDFD7 /* ShiftConstructor.swift */,
 				FF4FA76E20A9186A00704107 /* MediaManager.swift */,
-				FF4FA76820A783A400704107 /* Stepper.swift */,
 				FFAD11D220A3FF1300E2EBEE /* Camera.swift */,
 				FF4FA76220A6E9B700704107 /* Extensions.swift */,
 				FFDE86F820A3C2A100D5EEE1 /* Main.storyboard */,
@@ -147,7 +144,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFDE86F720A3C2A100D5EEE1 /* CamViewController.swift in Sources */,
-				FF4FA76920A783A400704107 /* Stepper.swift in Sources */,
 				FF4FA76320A6E9B700704107 /* Extensions.swift in Sources */,
 				FF4FA76F20A9186A00704107 /* MediaManager.swift in Sources */,
 				FFAD11D320A3FF1300E2EBEE /* Camera.swift in Sources */,

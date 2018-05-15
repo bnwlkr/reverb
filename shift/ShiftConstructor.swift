@@ -14,7 +14,7 @@ class ShiftConstructor: NSObject {
     var frames = [UIImage]()
     var delegate: ShiftConstructorDelegate?
     let context = CIContext()
-    var frameCount = 4
+    let frameCount = 3
     
     func add(image: UIImage) {
         frames.append(image)
