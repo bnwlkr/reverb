@@ -37,7 +37,7 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     func setup (videoView: UIView) {
         self.videoView = videoView
-        setupCaptureSession()
+        session.sessionPreset = .high
         setupDevices()
         setupIO(device: currentCam!)
     }
@@ -62,12 +62,7 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             setupConnection(mode: currentCam!.position)
         } catch {print(error)}
     }
-    
-    
-    func setupCaptureSession() {
-        session.sessionPreset = .high
-        
-    }
+
     
     func setupDevices () {
         let disc = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .unspecified)
@@ -83,15 +78,10 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     func setupConnection (mode: AVCaptureDevice.Position) {
         let connection = videoOut.connection(with: .video)!
-        guard connection.isVideoOrientationSupported else { return }
-        guard connection.isVideoMirroringSupported else { return }
         if mode == .front { connection.isVideoMirrored=true }
         connection.videoOrientation = .portrait
     }
     
-
-
-
     func setupIO (device: AVCaptureDevice) {
         do {
             let deviceInput = try AVCaptureDeviceInput(device: device)
