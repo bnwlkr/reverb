@@ -14,7 +14,6 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     let session = AVCaptureSession()
     let context = CIContext()
     let videoOut = AVCaptureVideoDataOutput()
-    var connection: AVCaptureConnection!
     let dataOutputQueue = DispatchQueue(label: "video data queue",
                                         qos: .userInitiated,
                                         attributes: [],
@@ -26,8 +25,7 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     var delegate: CameraDelegate?
     var videoView: UIView!
     
-    
-    
+
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let image = imageFromSampleBuffer(sampleBuffer: sampleBuffer) else { return }
         DispatchQueue.main.async { [unowned self] in
@@ -40,8 +38,8 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     func setup (videoView: UIView) {
         self.videoView = videoView
         setupCaptureSession()
-        setupDevice()
-        setupIO()
+        setupDevices()
+        setupIO(device: currentCam!)
     }
     
     func start () {
@@ -61,15 +59,17 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         do {
             session.addInput(try AVCaptureDeviceInput(device: currentCam!))
+            setupConnection(mode: currentCam!.position)
         } catch {print(error)}
     }
     
     
     func setupCaptureSession() {
         session.sessionPreset = .high
+        
     }
     
-    func setupDevice () {
+    func setupDevices () {
         let disc = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .unspecified)
         for device in disc.devices {
             if device.position == .front {
@@ -80,18 +80,25 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         currentCam = backCam // default
     }
+    
+    func setupConnection (mode: AVCaptureDevice.Position) {
+        let connection = videoOut.connection(with: .video)!
+        guard connection.isVideoOrientationSupported else { return }
+        guard connection.isVideoMirroringSupported else { return }
+        if mode == .front { connection.isVideoMirrored=true }
+        connection.videoOrientation = .portrait
+    }
+    
 
 
-    func setupIO () {
+
+    func setupIO (device: AVCaptureDevice) {
         do {
-            let deviceInput = try AVCaptureDeviceInput(device: currentCam!)
+            let deviceInput = try AVCaptureDeviceInput(device: device)
             if session.canAddInput(deviceInput) {  session.addInput(deviceInput) }
             if session.canAddOutput(videoOut) { session.addOutput(videoOut) }
             videoOut.setSampleBufferDelegate(self, queue: dataOutputQueue)
-            connection = videoOut.connection(with: .video)
-            guard connection.isVideoOrientationSupported else { return }
-            guard connection.isVideoMirroringSupported else { return }
-            connection.videoOrientation = .portrait
+            setupConnection(mode: device.position)
         } catch {print(error)}
     }
 

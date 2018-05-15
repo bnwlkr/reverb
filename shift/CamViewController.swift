@@ -10,13 +10,15 @@ import UIKit
 import AVFoundation
 import Photos
 
-class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDelegate {
+class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDelegate {
+ 
+    
     @IBOutlet weak var torch: UIButton!
     @IBOutlet weak var exit: UIButton!
     @IBOutlet weak var plus: UIButton!
     @IBOutlet weak var minus: UIButton!
-    @IBOutlet weak var top: UIImageView!
     @IBOutlet weak var bottom: UIImageView!
+    @IBOutlet weak var top: UIImageView!
     @IBOutlet weak var frameDisplay: UILabel!
     @IBOutlet weak var preview: UIView!
     @IBOutlet weak var cameraView: UIView!
@@ -35,8 +37,8 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        camera.delegate = self
         shifter.delegate = self
+        camera.delegate = self
         camera.setup(videoView: view)
         stepper = Stepper(incButton: plus, decButton: minus, label: frameDisplay)
         top.alpha = 0.6
@@ -47,11 +49,7 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
         camera.start()
     }
     
-    
-    func cameraStream(_ image: UIImage) {
-        if (!locked) { bottom.image = image }
-    }
-    
+
     func shiftConstructorFull () {
         camera.stop()
         locked = true
@@ -61,6 +59,10 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
         bottom.image = shifter.display()
         let settings = RenderSettings(fps: 18, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         mediaManager.save(settings: settings, images: shifter.frames)
+    }
+    
+    func cameraStream(_ image: UIImage) {
+        if (!locked) { bottom.image = image }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -96,8 +98,6 @@ class CamViewController: UIViewController, CameraDelegate , ShiftConstructorDele
     }
     
    
-    
-    
     @IBAction func torch(_ sender: UIButton) {
         guard let device = AVCaptureDevice.default(for: .video) else { return }
         if device.hasTorch {

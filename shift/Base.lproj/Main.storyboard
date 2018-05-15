@@ -20,6 +20,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a8P-Uf-Iru" userLabel="bottom">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0pg-mc-wqQ" userLabel="top">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
@@ -171,7 +172,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="bottom" destination="a8P-Uf-Iru" id="Cwf-QX-9G5"/>
+                        <outlet property="bottom" destination="a8P-Uf-Iru" id="cLT-y1-ru3"/>
                         <outlet property="cameraView" destination="zlF-R3-Hbr" id="9T8-zO-zet"/>
                         <outlet property="exit" destination="33M-x9-sW9" id="GTk-n4-r1h"/>
                         <outlet property="frameDisplay" destination="h7H-Ea-dCN" id="hIE-22-t5I"/>
