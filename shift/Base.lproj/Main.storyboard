@@ -90,7 +90,7 @@
                                             <action selector="torch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xM4-iD-8T8"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEV-Bc-LPn" userLabel="fuckyou">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEV-Bc-LPn" userLabel="fuckyou" customClass="button" customModule="shift" customModuleProvider="target">
                                         <rect key="frame" x="167" y="619" width="80" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="jEV-Bc-LPn" secondAttribute="height" multiplier="1:1" id="1AR-Xx-GL2"/>
@@ -103,6 +103,10 @@
                                             <action selector="clack:" destination="BYZ-38-t0r" eventType="touchDown" id="4D3-EF-uaD"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Akb-93-O3P">
+                                        <rect key="frame" x="31" y="246" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="6sJ-Qd-1V2" secondAttribute="trailing" constant="17" id="8zd-n4-mG7"/>
@@ -141,6 +145,7 @@
                         <outlet property="clack" destination="jEV-Bc-LPn" id="FQ0-Lj-WeA"/>
                         <outlet property="exit" destination="33M-x9-sW9" id="GTk-n4-r1h"/>
                         <outlet property="preview" destination="tUm-w8-hpD" id="Ufi-NN-Tct"/>
+                        <outlet property="tes" destination="Akb-93-O3P" id="t6S-HR-HmB"/>
                         <outlet property="top" destination="0pg-mc-wqQ" id="JpG-Jh-iPB"/>
                         <outlet property="torch" destination="oew-hb-zVx" id="wUU-J0-uxT"/>
                     </connections>

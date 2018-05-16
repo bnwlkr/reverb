@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+var wait = true
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

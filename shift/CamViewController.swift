@@ -12,6 +12,8 @@ import Photos
 
 class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDelegate {
  
+
+    @IBOutlet weak var tes: UIImageView!
     let clacks = [#imageLiteral(resourceName: "clack0"), #imageLiteral(resourceName: "clack1"), #imageLiteral(resourceName: "clack2"), #imageLiteral(resourceName: "clack3")]
     @IBOutlet weak var torch: UIButton!
     @IBOutlet weak var exit: UIButton!
@@ -65,6 +67,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     }
     
     @IBAction func exitPreview(_ sender: UIButton) {
+        num=0
         clack.setImage(clacks[0], for: .normal)
         preview.isHidden=true
         cameraView.isHidden=false
@@ -73,6 +76,10 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         locked = false
     }
     
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
+    }
  
     @IBAction func switchCam(_ sender: UIButton) {
         camera.switchCam()
@@ -80,12 +87,10 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     
     @IBAction func clack(_ sender: UIButton) {
         num += 1
-        clack.setImage(clacks[num], for: .normal)
-        clack.setNeedsDisplay()
-        sleep(1)
-        let next = camera.latest!
-        top.image = shifter.applyFilter(image1: CIImage(image: next)!, filterName: "CIEdges")
-        shifter.add(image: next)
+        self.clack.setImage(self.clacks[self.num], for: .normal)
+        let next = self.camera.latest!
+        self.top.image = self.shifter.applyFilter(image1: CIImage(image: next)!, filterName: "CIEdges")
+        delay(0.001, closure: {self.shifter.add(image: next)})
     }
     
    
