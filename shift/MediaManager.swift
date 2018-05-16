@@ -15,7 +15,6 @@ class MediaManager: NSObject {
         let imageAnimator = ImageAnimator(renderSettings: settings)
         imageAnimator.images = images.reflect().repeated(times: 8)
         imageAnimator.render() {
-            print ("hey")
         }
     }
     

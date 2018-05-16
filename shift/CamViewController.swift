@@ -13,7 +13,6 @@ import Photos
 class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDelegate {
  
 
-    @IBOutlet weak var tes: UIImageView!
     let clacks = [#imageLiteral(resourceName: "clack0"), #imageLiteral(resourceName: "clack1"), #imageLiteral(resourceName: "clack2"), #imageLiteral(resourceName: "clack3")]
     @IBOutlet weak var torch: UIButton!
     @IBOutlet weak var exit: UIButton!
@@ -22,8 +21,11 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     @IBOutlet weak var preview: UIView!
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var clack: UIButton!
-    var num = 0
-    
+    @IBOutlet weak var save: UIButton!
+    @IBOutlet weak var swap: UIButton!
+    @IBOutlet weak var fb: UIButton!
+    @IBOutlet weak var insta: UIButton!
+    var numFrames = 0
     let camera = Camera()
     let mediaManager = MediaManager()
     let shifter = ShiftConstructor()
@@ -41,6 +43,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         camera.setup(videoView: view)
         top.alpha = 0.6
         preview.isHidden=true
+        setButtonShadow(buttons: [torch, exit, clack, swap, fb, insta])
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -54,8 +57,6 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         preview.isHidden=false
         cameraView.isHidden=true
         bottom.image = shifter.display()
-        let settings = RenderSettings(fps: 18, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        mediaManager.save(settings: settings, images: shifter.frames)
     }
     
     func cameraStream(_ image: UIImage) {
@@ -67,7 +68,11 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     }
     
     @IBAction func exitPreview(_ sender: UIButton) {
-        num=0
+        if (torchOn) {
+            torchOn=false
+            torch(nil)
+        }
+        numFrames=0
         clack.setImage(clacks[0], for: .normal)
         preview.isHidden=true
         cameraView.isHidden=false
@@ -86,29 +91,42 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     }
     
     @IBAction func clack(_ sender: UIButton) {
-        num += 1
-        self.clack.setImage(self.clacks[self.num], for: .normal)
-        let next = self.camera.latest!
-        self.top.image = self.shifter.applyFilter(image1: CIImage(image: next)!, filterName: "CIEdges")
+        numFrames += 1
+        clack.setImage(clacks[numFrames], for: .normal)
+        let next = camera.latest!
+        top.image = shifter.applyFilter(image1: CIImage(image: next)!, filterName: "CIEdges")
         delay(0.001, closure: {self.shifter.add(image: next)})
     }
     
-   
-    @IBAction func torch(_ sender: UIButton) {
+    @IBAction func save(_ sender: Any) {
+        let settings = RenderSettings(fps: 16, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        mediaManager.save(settings: settings, images: shifter.frames)
+    }
+    
+    @IBAction func torch(_ sender: UIButton?) {
         guard let device = AVCaptureDevice.default(for: .video) else { return }
         if device.hasTorch {
             do {
                 try device.lockForConfiguration()
                 if torchOn==false { device.torchMode = .on
+                    torch.setImage(#imageLiteral(resourceName: "flashon"), for: .normal)
                     torchOn=true
                 }
                 else {
                     device.torchMode = .off
+                    torch.setImage(#imageLiteral(resourceName: "flash"), for: .normal)
                     torchOn=false
                 }
                 device.unlockForConfiguration()
             } catch { print("Torch could not be used") }
         } else { print("Torch is not available") }
+    }
+    
+    func setButtonShadow  (buttons: [UIButton]) {
+        for button in buttons {
+            button.layer.shadowOpacity = 0.2
+            button.layer.shadowRadius = 0.8
+        }
     }
     
     
