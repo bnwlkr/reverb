@@ -97,13 +97,21 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     @IBAction func share(_ sender: UIButton) {
         switch sender.tag {
         case 0:
-            mediaManager.storeForSharing(to: .instagram, images: shifter.frames, completion: {
-                url in
-                let instagramController = UIDocumentInteractionController.init(url: url)
-                instagramController.uti = "com.instagram.exclusivegram"
-                instagramController.delegate = self
-                instagramController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+            _save(completion: { url in
+                if let path = url {
+                    let assetPath: String = path.path
+                    let instaPath = "instagram://library?AssetPath=" + assetPath
+                    let instaPathURL = URL(string: instaPath)!
+                    DispatchQueue.main.async {
+                        if UIApplication.shared.canOpenURL(instaPathURL) {
+                            UIApplication.shared.open(instaPathURL)
+                        } else {
+                            UIApplication.shared.open(URL(string: "https://www.instagram.com")!)
+                        }
+                    }
+                }
             })
+            
         case 1:
             break
         default:
@@ -111,9 +119,14 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         }
     }
     
+    
+    func _save(completion: @escaping (URL?)->()) {
+        let settings = RenderSettings(fps: Int32(FPS), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        mediaManager.save(settings: settings, images: shifter.frames, completion: completion)
+    }
+    
     @IBAction func save(_ sender: Any) {
-        let settings = RenderSettings(fps: Int32(FPS), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, url: URL(fileURLWithPath: "fuckoff"))
-        mediaManager.save(settings: settings, images: shifter.frames)
+        _save(completion: {_ in})
     }
     
     @IBAction func torch(_ sender: UIButton?) {
