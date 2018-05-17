@@ -10,27 +10,22 @@ import UIKit
 import AVFoundation
 import Photos
 
-class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDelegate {
- 
-
-    let clacks = [#imageLiteral(resourceName: "clack0"), #imageLiteral(resourceName: "clack1"), #imageLiteral(resourceName: "clack2"), #imageLiteral(resourceName: "clack3")]
+class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDelegate, UIDocumentInteractionControllerDelegate {
+    
+    @IBOutlet var buttons: [UIButton]!
     @IBOutlet weak var torch: UIButton!
-    @IBOutlet weak var exit: UIButton!
     @IBOutlet weak var bottom: UIImageView!
     @IBOutlet weak var top: UIImageView!
     @IBOutlet weak var preview: UIView!
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var clack: UIButton!
-    @IBOutlet weak var save: UIButton!
-    @IBOutlet weak var swap: UIButton!
-    @IBOutlet weak var fb: UIButton!
-    @IBOutlet weak var insta: UIButton!
-    var numFrames = 0
     let camera = Camera()
     let mediaManager = MediaManager()
     let shifter = ShiftConstructor()
+    var numFrames = 0
     var locked = false
     var torchOn = false
+    let clacks = [#imageLiteral(resourceName: "shift0"), #imageLiteral(resourceName: "shift1"), #imageLiteral(resourceName: "shift2"), #imageLiteral(resourceName: "shift3")]
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -43,8 +38,9 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         camera.setup(videoView: view)
         top.alpha = 0.6
         preview.isHidden=true
-        setButtonShadow(buttons: [torch, exit, clack, swap, fb, insta])
+        setButtonShadows()
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         camera.start()
@@ -98,8 +94,25 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         delay(0.001, closure: {self.shifter.add(image: next)})
     }
     
+    @IBAction func share(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            mediaManager.storeForSharing(to: .instagram, images: shifter.frames, completion: {
+                url in
+                let instagramController = UIDocumentInteractionController.init(url: url)
+                instagramController.uti = "com.instagram.exclusivegram"
+                instagramController.delegate = self
+                instagramController.presentOpenInMenu(from: self.view.frame, in: self.view, animated: true)
+            })
+        case 1:
+            break
+        default:
+            break
+        }
+    }
+    
     @IBAction func save(_ sender: Any) {
-        let settings = RenderSettings(fps: 16, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        let settings = RenderSettings(fps: Int32(FPS), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, url: URL(fileURLWithPath: "fuckoff"))
         mediaManager.save(settings: settings, images: shifter.frames)
     }
     
@@ -122,7 +135,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         } else { print("Torch is not available") }
     }
     
-    func setButtonShadow  (buttons: [UIButton]) {
+    func setButtonShadows  () {
         for button in buttons {
             button.layer.shadowOpacity = 0.2
             button.layer.shadowRadius = 0.8

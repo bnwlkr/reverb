@@ -4,58 +4,52 @@ import AVFoundation
 import UIKit
 import Photos
 
-enum Social {
+enum Social  {
     case facebook
     case instagram
 }
 
-
-class MediaManager: NSObject {
+class MediaManager: NSObject, UIDocumentInteractionControllerDelegate {
     func save (settings: RenderSettings, images: [UIImage]) {
         let imageAnimator = ImageAnimator(renderSettings: settings)
         imageAnimator.images = images.reflect().repeated(times: 8)
         imageAnimator.render() {
         }
     }
-    
-    func share (to social: Social) {
+    func storeForSharing (to social: Social, images: [UIImage], completion: @escaping (URL)->()) {
         switch (social) {
-        case .facebook:
-            break
         case .instagram:
+            let tempDirectory = FileManager().temporaryDirectory
+            let postURL = tempDirectory.appendingPathComponent("postingVideo").appendingPathExtension("igo")
+            let settings = RenderSettings(fps: Int32(FPS), width: 1080, height: 1350, url: postURL)
+            let imageAnimator = ImageAnimator(renderSettings: settings)
+            imageAnimator.images = images.reflect().repeated(times: 8)
+            imageAnimator.store(completion: completion)
+        case .facebook:
             break
         }
     }
-
 }
+    
 
 struct RenderSettings {
     
-    init(fps: Int32, width: CGFloat, height: CGFloat) {
+    init(fps: Int32, width: CGFloat, height: CGFloat, url: URL) {
         self.fps=fps
         self.width=width
         self.height=height
+        self.outputURL = url
     }
     var width: CGFloat!
     var height: CGFloat!
     var fps: Int32!
     var avCodecKey = AVVideoCodecType.h264
-    var videoFilename = "shift"
-    var videoFilenameExt = "mp4"
+    var outputURL: URL!
     
     var size: CGSize {
         return CGSize(width: width, height: height)
     }
-    
-    var outputURL: URL {
-        // Use the CachesDirectory so the rendered video file sticks around as long as we need it to.
-        // Using the CachesDirectory ensures the file won't be included in a backup of the app.
-        let fileManager = FileManager.default
-        if let tmpDirURL = try? fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true) {
-            return tmpDirURL.appendingPathComponent(videoFilename).appendingPathExtension(videoFilenameExt)
-        }
-        fatalError("URLForDirectory() failed")
-    }
+
 }
 
 class ImageAnimator {
@@ -93,6 +87,14 @@ class ImageAnimator {
     init(renderSettings: RenderSettings) {
         settings = renderSettings
         videoWriter = VideoWriter(renderSettings: settings)
+    }
+    
+    func store (completion: @escaping (URL)->()) {
+        ImageAnimator.removeFileAtURL(fileURL: settings.outputURL)
+        videoWriter.start()
+        videoWriter.render(appendPixelBuffers: appendPixelBuffers) {
+            completion(self.settings.outputURL)
+        }
     }
     
     func render(completion: @escaping ()->Void) {

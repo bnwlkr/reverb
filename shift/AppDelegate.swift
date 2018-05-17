@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-var wait = true
+let FPS = 16
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

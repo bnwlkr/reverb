@@ -10,16 +10,6 @@ import Foundation
 import UIKit
 
 
-extension CountableClosedRange {
-    func topEdge (value: Bound) -> Bool {
-        return value==self.upperBound
-    }
-    func bottomEdge (value: Bound) -> Bool {
-        return value==self.lowerBound
-    }
-}
-
-
 extension Array {
     func reflect () -> Array<Element> {
         var ret = Array<Element>()
@@ -39,4 +29,17 @@ extension Array {
     }
 }
 
+extension UIImage {
+    func crop( rect: CGRect) -> UIImage {
+        var rect = rect
+        rect.origin.x*=self.scale
+        rect.origin.y*=self.scale
+        rect.size.width*=self.scale
+        rect.size.height*=self.scale
+        
+        let imageRef = self.cgImage!.cropping(to: rect)
+        let image = UIImage(cgImage: imageRef!, scale: self.scale, orientation: self.imageOrientation)
+        return image
+    }
+}
 
