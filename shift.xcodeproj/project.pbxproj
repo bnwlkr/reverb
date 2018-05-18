@@ -15,7 +15,6 @@
 		FFDE86F520A3C2A100D5EEE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE86F420A3C2A100D5EEE1 /* AppDelegate.swift */; };
 		FFDE86F720A3C2A100D5EEE1 /* CamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE86F620A3C2A100D5EEE1 /* CamViewController.swift */; };
 		FFDE86FA20A3C2A100D5EEE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDE86F820A3C2A100D5EEE1 /* Main.storyboard */; };
-		FFDE86FD20A3C2A100D5EEE1 /* shift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFDE86FB20A3C2A100D5EEE1 /* shift.xcdatamodeld */; };
 		FFDE86FF20A3C2A200D5EEE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFDE86FE20A3C2A200D5EEE1 /* Assets.xcassets */; };
 		FFDE870220A3C2A200D5EEE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDE870020A3C2A200D5EEE1 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -30,7 +29,6 @@
 		FFDE86F420A3C2A100D5EEE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFDE86F620A3C2A100D5EEE1 /* CamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamViewController.swift; sourceTree = "<group>"; };
 		FFDE86F920A3C2A100D5EEE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FFDE86FC20A3C2A100D5EEE1 /* shift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = shift.xcdatamodel; sourceTree = "<group>"; };
 		FFDE86FE20A3C2A200D5EEE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFDE870120A3C2A200D5EEE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FFDE870320A3C2A200D5EEE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,7 +67,6 @@
 				FFDE86FE20A3C2A200D5EEE1 /* Assets.xcassets */,
 				FFDE870020A3C2A200D5EEE1 /* LaunchScreen.storyboard */,
 				FFDE870320A3C2A200D5EEE1 /* Info.plist */,
-				FFDE86FB20A3C2A100D5EEE1 /* shift.xcdatamodeld */,
 			);
 			path = shift;
 			sourceTree = "<group>";
@@ -153,7 +150,6 @@
 				FFAD11D320A3FF1300E2EBEE /* Camera.swift in Sources */,
 				FFDE86F520A3C2A100D5EEE1 /* AppDelegate.swift in Sources */,
 				FFD0F10A20A4D318000BDFD7 /* ShiftConstructor.swift in Sources */,
-				FFDE86FD20A3C2A100D5EEE1 /* shift.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,19 +342,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		FFDE86FB20A3C2A100D5EEE1 /* shift.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				FFDE86FC20A3C2A100D5EEE1 /* shift.xcdatamodel */,
-			);
-			currentVersion = FFDE86FC20A3C2A100D5EEE1 /* shift.xcdatamodel */;
-			path = shift.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = FFDE86E920A3C2A100D5EEE1 /* Project object */;
 }
