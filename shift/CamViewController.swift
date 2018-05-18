@@ -10,26 +10,22 @@ import UIKit
 import AVFoundation
 import Photos
 
-class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDelegate {
- 
+class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDelegate, UIDocumentInteractionControllerDelegate {
     
+    @IBOutlet var buttons: [UIButton]!
     @IBOutlet weak var torch: UIButton!
-    @IBOutlet weak var exit: UIButton!
-    @IBOutlet weak var plus: UIButton!
-    @IBOutlet weak var minus: UIButton!
     @IBOutlet weak var bottom: UIImageView!
     @IBOutlet weak var top: UIImageView!
-    @IBOutlet weak var frameDisplay: UILabel!
     @IBOutlet weak var preview: UIView!
     @IBOutlet weak var cameraView: UIView!
-    
-    
-    var stepper: Stepper!
+    @IBOutlet weak var clack: UIButton!
     let camera = Camera()
     let mediaManager = MediaManager()
     let shifter = ShiftConstructor()
+    var numFrames = 0
     var locked = false
     var torchOn = false
+    let clacks = [#imageLiteral(resourceName: "shift0"), #imageLiteral(resourceName: "shift1"), #imageLiteral(resourceName: "shift2"), #imageLiteral(resourceName: "shift3")]
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -40,16 +36,16 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         shifter.delegate = self
         camera.delegate = self
         camera.setup(videoView: view)
-        stepper = Stepper(incButton: plus, decButton: minus, label: frameDisplay)
         top.alpha = 0.6
         preview.isHidden=true
+        setButtonShadows()
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         camera.start()
     }
     
-
     func shiftConstructorFull () {
         camera.stop()
         locked = true
@@ -57,8 +53,6 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         preview.isHidden=false
         cameraView.isHidden=true
         bottom.image = shifter.display()
-        let settings = RenderSettings(fps: 18, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        mediaManager.save(settings: settings, images: shifter.frames)
     }
     
     func cameraStream(_ image: UIImage) {
@@ -68,18 +62,14 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         camera.focus(touchPoint: touches.first!)
     }
-
-    @IBAction func frameUp(_ sender: UIButton) {
-        stepper.increment()
-        shifter.frameCount=stepper.value
-    }
-    
-    @IBAction func frameDown(_ sender: UIButton) {
-        stepper.decrement()
-        shifter.frameCount=stepper.value
-    }
     
     @IBAction func exitPreview(_ sender: UIButton) {
+        if (torchOn) {
+            torchOn=false
+            torch(nil)
+        }
+        numFrames=0
+        clack.setImage(clacks[0], for: .normal)
         preview.isHidden=true
         cameraView.isHidden=false
         shifter.clear()
@@ -87,32 +77,89 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         locked = false
     }
     
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
+    }
  
     @IBAction func switchCam(_ sender: UIButton) {
         camera.switchCam()
     }
+    
     @IBAction func clack(_ sender: UIButton) {
+        numFrames += 1
+        clack.setImage(clacks[numFrames], for: .normal)
         let next = camera.latest!
         top.image = shifter.applyFilter(image1: CIImage(image: next)!, filterName: "CIEdges")
-        shifter.add(image: next)
+        delay(0.001, closure: {self.shifter.add(image: next)})
     }
     
-   
-    @IBAction func torch(_ sender: UIButton) {
+    @IBAction func share(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            _save(completion: { url in
+                if let path = url {
+                    let assetPath: String = path.path
+                    let instaPath = "instagram://library?AssetPath=" + assetPath
+                    let instaPathURL = URL(string: instaPath)!
+                    DispatchQueue.main.async {
+                        if UIApplication.shared.canOpenURL(instaPathURL) {
+                            UIApplication.shared.open(instaPathURL)
+                        } else {
+                            UIApplication.shared.open(URL(string: "https://www.instagram.com")!)
+                        }
+                    }
+                }
+            })
+        case 1:
+            _save(completion: { url in
+                let fbPath = URL(string: "fb://profile")
+                    DispatchQueue.main.async {
+                        if UIApplication.shared.canOpenURL(fbPath!) {
+                            UIApplication.shared.open(fbPath!)
+                        } else {
+                            UIApplication.shared.open(URL(string: "https://www.facebook.com")!)
+                        }
+                    }
+                })
+        default:
+            break
+        }
+    }
+    
+    func _save(completion: @escaping (URL?)->()) {
+        let settings = RenderSettings(fps: Int32(FPS), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        mediaManager.save(settings: settings, images: shifter.frames, completion: completion)
+    }
+    
+    @IBAction func save(_ sender: Any) {
+        _save(completion: {_ in})
+    }
+    
+    @IBAction func torch(_ sender: UIButton?) {
         guard let device = AVCaptureDevice.default(for: .video) else { return }
         if device.hasTorch {
             do {
                 try device.lockForConfiguration()
                 if torchOn==false { device.torchMode = .on
+                    torch.setImage(#imageLiteral(resourceName: "flashon"), for: .normal)
                     torchOn=true
                 }
                 else {
                     device.torchMode = .off
+                    torch.setImage(#imageLiteral(resourceName: "flash"), for: .normal)
                     torchOn=false
                 }
                 device.unlockForConfiguration()
             } catch { print("Torch could not be used") }
         } else { print("Torch is not available") }
+    }
+    
+    func setButtonShadows  () {
+        for button in buttons {
+            button.layer.shadowOpacity = 0.2
+            button.layer.shadowRadius = 0.8
+        }
     }
     
     

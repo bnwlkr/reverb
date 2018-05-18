@@ -4,34 +4,21 @@ import AVFoundation
 import UIKit
 import Photos
 
-enum Social {
+enum Social  {
     case facebook
     case instagram
 }
 
-
-class MediaManager: NSObject {
-    func save (settings: RenderSettings, images: [UIImage]) {
+class MediaManager: NSObject, UIDocumentInteractionControllerDelegate {
+    func save (settings: RenderSettings, images: [UIImage], completion: @escaping (URL?) -> ()) {
         let imageAnimator = ImageAnimator(renderSettings: settings)
         imageAnimator.images = images.reflect().repeated(times: 8)
-        imageAnimator.render() {
-            print ("hey")
-        }
+        imageAnimator.save(completion: completion)
     }
-    
-    func share (to social: Social) {
-        switch (social) {
-        case .facebook:
-            break
-        case .instagram:
-            break
-        }
-    }
-
 }
+    
 
 struct RenderSettings {
-    
     init(fps: Int32, width: CGFloat, height: CGFloat) {
         self.fps=fps
         self.width=width
@@ -40,9 +27,9 @@ struct RenderSettings {
     var width: CGFloat!
     var height: CGFloat!
     var fps: Int32!
-    var avCodecKey = AVVideoCodecType.h264
-    var videoFilename = "shift"
+    var videoFilename = "render"
     var videoFilenameExt = "mp4"
+    var avCodecKey = AVVideoCodecType.h264
     
     var size: CGSize {
         return CGSize(width: width, height: height)
@@ -68,43 +55,39 @@ class ImageAnimator {
     
     var frameNum = 0
     
-    class func saveToLibrary(videoURL: URL) {
+    class func saveToLibrary(videoURL: URL, completion: @escaping (URL?)->()) {
         PHPhotoLibrary.requestAuthorization { status in
             guard status == .authorized else { return }
-            
+            var placeHolder: PHObjectPlaceholder!
             PHPhotoLibrary.shared().performChanges({
-                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoURL)
-            }) { success, error in
-                if !success {
-                    print("Could not save video to photo library:", error!)
-                }
-            }
+                placeHolder = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoURL)?.placeholderForCreatedAsset
+            }, completionHandler: {success, error in
+                let asset = PHAsset.fetchAssets(withLocalIdentifiers: [placeHolder.localIdentifier], options: nil).firstObject
+                asset?.getURL(completionHandler: completion)
+            })
         }
     }
     
     class func removeFileAtURL(fileURL: URL) {
         do {
             try FileManager.default.removeItem(atPath: fileURL.path)
-        }
-        catch _ as NSError {
-            // Assume file doesn't exist.
-        }
+        } catch {print(error)}
     }
     
     init(renderSettings: RenderSettings) {
         settings = renderSettings
         videoWriter = VideoWriter(renderSettings: settings)
     }
+
     
-    func render(completion: @escaping ()->Void) {
+    func save(completion: @escaping (URL?)->Void) {
         
         // The VideoWriter will fail if a file exists at the URL, so clear it out first.
         ImageAnimator.removeFileAtURL(fileURL: settings.outputURL)
         
         videoWriter.start()
         videoWriter.render(appendPixelBuffers: appendPixelBuffers) {
-            ImageAnimator.saveToLibrary(videoURL: self.settings.outputURL)
-            completion()
+            ImageAnimator.saveToLibrary(videoURL: self.settings.outputURL, completion:  completion)
         }
         
     }
@@ -270,6 +253,7 @@ class VideoWriter {
         return pixelBufferAdaptor.append(pixelBuffer, withPresentationTime: presentationTime)
     }
 }
+
 
 
 
