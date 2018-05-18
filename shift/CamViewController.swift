@@ -111,14 +111,21 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
                     }
                 }
             })
-            
         case 1:
-            break
+            _save(completion: { url in
+                let fbPath = URL(string: "fb://profile")
+                    DispatchQueue.main.async {
+                        if UIApplication.shared.canOpenURL(fbPath!) {
+                            UIApplication.shared.open(fbPath!)
+                        } else {
+                            UIApplication.shared.open(URL(string: "https://www.facebook.com")!)
+                        }
+                    }
+                })
         default:
             break
         }
     }
-    
     
     func _save(completion: @escaping (URL?)->()) {
         let settings = RenderSettings(fps: Int32(FPS), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)

@@ -23,6 +23,7 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>instagram</string>
+		<string>fb</string>
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photos</string>
