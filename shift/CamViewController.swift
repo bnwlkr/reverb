@@ -12,6 +12,8 @@ import Photos
 
 class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDelegate, UIDocumentInteractionControllerDelegate {
     
+    
+    @IBOutlet weak var savedView: UIVisualEffectView!
     @IBOutlet var buttons: [UIButton]!
     @IBOutlet weak var torch: UIButton!
     @IBOutlet weak var bottom: UIImageView!
@@ -26,6 +28,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     var locked = false
     var torchOn = false
     let clacks = [#imageLiteral(resourceName: "shift0"), #imageLiteral(resourceName: "shift1"), #imageLiteral(resourceName: "shift2"), #imageLiteral(resourceName: "shift3")]
+  
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -44,6 +47,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         camera.start()
+        
     }
     
     func shiftConstructorFull () {
@@ -98,6 +102,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         switch sender.tag {
         case 0:
             _save(completion: { url in
+                self.displaySaved({
                 if let path = url {
                     let assetPath: String = path.path
                     let instaPath = "instagram://library?AssetPath=" + assetPath
@@ -110,9 +115,11 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
                         }
                     }
                 }
+                }, true)
             })
         case 1:
             _save(completion: { url in
+                self.displaySaved({
                 let fbPath = URL(string: "fb://profile")
                     DispatchQueue.main.async {
                         if UIApplication.shared.canOpenURL(fbPath!) {
@@ -121,6 +128,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
                             UIApplication.shared.open(URL(string: "https://www.facebook.com")!)
                         }
                     }
+                }, true)
                 })
         default:
             break
@@ -133,7 +141,28 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     }
     
     @IBAction func save(_ sender: Any) {
-        _save(completion: {_ in})
+        _save(completion: {_ in
+            self.displaySaved({}, false)
+        })
+    }
+    
+    
+    func displaySaved (_ completion: @escaping ()->(), _ share: Bool) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.savedView.alpha=1.0
+            }) {_ in
+                if share {
+                    self.savedView.alpha=0
+                    completion()
+                } else {
+                    UIView.animate(withDuration: 2.0, animations: {
+                        self.savedView.alpha=0.0
+                    })
+                }
+            }
+            
+        }
     }
     
     @IBAction func torch(_ sender: UIButton?) {
