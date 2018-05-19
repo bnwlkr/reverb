@@ -63,6 +63,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         for button in buttons {
             button.rotate(to: UIDevice.current.orientation)
         }
+        savedView.rotate(to: UIDevice.current.orientation)
     }
     
     func shiftConstructorFull () {
