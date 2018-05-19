@@ -31,11 +31,17 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     var locked = false
     var torchOn = false
     let clacks = [#imageLiteral(resourceName: "shift0"), #imageLiteral(resourceName: "shift1"), #imageLiteral(resourceName: "shift2"), #imageLiteral(resourceName: "shift3")]
+    var currentOrientation: UIDeviceOrientation!
   
-    
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +52,20 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         preview.isHidden=true
         setButtonShadows()
         savingView.stopAnimating()
+        currentOrientation = UIDevice.current.orientation
+        NotificationCenter.default.addObserver(self, selector: #selector(CamViewController.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         camera.start()
+    }
+    
+    @objc func rotated () {
+        for button in buttons {
+            button.rotateUpRight(from: currentOrientation, to: UIDevice.current.orientation)
+        }
+        currentOrientation = UIDevice.current.orientation
     }
     
     func shiftConstructorFull () {
@@ -100,7 +115,9 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         camera.switchCam()
     }
     
+    
     @IBAction func clack(_ sender: UIButton) {
+        debugPrint(UIDevice.current.orientation == .portrait)
         clack.setImage(clacks[shifter.frames.count+1], for: .normal)
         let next = camera.latest!
         top.image = shifter.applyFilter(image1: CIImage(image: next)!, filterName: "CIEdges")
