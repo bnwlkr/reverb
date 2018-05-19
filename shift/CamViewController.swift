@@ -14,6 +14,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     
     
 
+    @IBOutlet weak var savingView: UIActivityIndicatorView!
     @IBOutlet weak var focusView: UIImageView!
     @IBOutlet weak var savedView: UIVisualEffectView!
     @IBOutlet var buttons: [UIButton]!
@@ -44,6 +45,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         top.alpha = 0.6
         preview.isHidden=true
         setButtonShadows()
+        savingView.stopAnimating()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -146,6 +148,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     }
     
     func _save(completion: @escaping (URL?)->()) {
+        savingView.startAnimating()
         let settings = RenderSettings(fps: Int32(FPS), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         mediaManager.save(settings: settings, images: shifter.frames, completion: completion)
     }
@@ -159,6 +162,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     
     func displaySaved (_ completion: @escaping ()->(), _ share: Bool) {
         DispatchQueue.main.async {
+            self.savingView.stopAnimating()
             UIView.animate(withDuration: 0.5, animations: {
                 self.savedView.alpha=1.0
             }) {_ in
