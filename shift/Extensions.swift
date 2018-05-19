@@ -46,33 +46,18 @@ extension UIImage {
 }
 
 extension UIView {
-    func rotateUpRight (from: UIDeviceOrientation, to: UIDeviceOrientation) {
+    func rotate (to: UIDeviceOrientation) {
         UIView.animate(withDuration: 0.5, animations: {
-        switch (from) {
-        case .portrait:
+            var angle: CGFloat = 0.0
             switch (to) {
-            case .landscapeRight:
-                self.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
             case .landscapeLeft:
-                self.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))
-            default:
-                break
-            }
-        case .landscapeLeft:
-            switch (to) {
-            case .portrait:
-                print ("hey")
-                self.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/2))
+                angle = CGFloat(Double.pi/2);
             case .landscapeRight:
-                self.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+                angle = CGFloat(-Double.pi/2);
             default:
-                break
+                angle = 0.0
             }
-        case .landscapeRight:
-            break
-        default:
-            break
-        }
+            self.transform = CGAffineTransform(rotationAngle: angle)
         })
     }
 }
