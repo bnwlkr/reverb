@@ -13,6 +13,8 @@ import Photos
 class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDelegate, UIDocumentInteractionControllerDelegate {
     
     
+
+    @IBOutlet weak var focusView: UIImageView!
     @IBOutlet weak var savedView: UIVisualEffectView!
     @IBOutlet var buttons: [UIButton]!
     @IBOutlet weak var torch: UIButton!
@@ -21,10 +23,10 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     @IBOutlet weak var preview: UIView!
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var clack: UIButton!
+    var activityView: UIActivityViewController!
     let camera = Camera()
     let mediaManager = MediaManager()
     let shifter = ShiftConstructor()
-    var numFrames = 0
     var locked = false
     var torchOn = false
     let clacks = [#imageLiteral(resourceName: "shift0"), #imageLiteral(resourceName: "shift1"), #imageLiteral(resourceName: "shift2"), #imageLiteral(resourceName: "shift3")]
@@ -47,7 +49,6 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         camera.start()
-        
     }
     
     func shiftConstructorFull () {
@@ -65,6 +66,14 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         camera.focus(touchPoint: touches.first!)
+        focusView.center = touches.first!.location(in: cameraView)
+        UIView.animate(withDuration: 0.2, animations: {
+            self.focusView.alpha=1.0
+        }) {_ in
+            UIView.animate(withDuration: 0.5, animations: {
+                self.focusView.alpha=0.0
+            })
+        }
     }
     
     @IBAction func exitPreview(_ sender: UIButton) {
@@ -72,7 +81,6 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
             torchOn=false
             torch(nil)
         }
-        numFrames=0
         clack.setImage(clacks[0], for: .normal)
         preview.isHidden=true
         cameraView.isHidden=false
@@ -91,8 +99,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     }
     
     @IBAction func clack(_ sender: UIButton) {
-        numFrames += 1
-        clack.setImage(clacks[numFrames], for: .normal)
+        clack.setImage(clacks[shifter.frames.count+1], for: .normal)
         let next = camera.latest!
         top.image = shifter.applyFilter(image1: CIImage(image: next)!, filterName: "CIEdges")
         delay(0.001, closure: {self.shifter.add(image: next)})
@@ -117,6 +124,8 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
                 }
                 }, true)
             })
+            
+            break
         case 1:
             _save(completion: { url in
                 self.displaySaved({
@@ -130,6 +139,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
                     }
                 }, true)
                 })
+            
         default:
             break
         }

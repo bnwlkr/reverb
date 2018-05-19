@@ -25,54 +25,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0pg-mc-wqQ" userLabel="top">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zlF-R3-Hbr" userLabel="cameraView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sJ-Qd-1V2" userLabel="swap">
-                                        <rect key="frame" x="360" y="19" width="37" height="37"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="6sJ-Qd-1V2" secondAttribute="height" multiplier="1:1" id="Zzh-Kx-NpA"/>
-                                            <constraint firstAttribute="height" constant="37" id="dgq-eH-EAJ"/>
-                                        </constraints>
-                                        <state key="normal" title="Button" image="switch"/>
-                                        <connections>
-                                            <action selector="switchCam:" destination="BYZ-38-t0r" eventType="touchDown" id="qMy-r0-yIm"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oew-hb-zVx" userLabel="torch">
-                                        <rect key="frame" x="12" y="17" width="49" height="49"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="49" id="Vow-Wd-Sit"/>
-                                            <constraint firstAttribute="height" constant="49" id="gea-wu-x9f"/>
-                                        </constraints>
-                                        <state key="normal" title="flash" image="flash"/>
-                                        <connections>
-                                            <action selector="torch:" destination="BYZ-38-t0r" eventType="touchDown" id="Uhz-7J-Ra0"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEV-Bc-LPn" userLabel="klack">
-                                        <rect key="frame" x="169" y="615" width="76" height="76"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="jEV-Bc-LPn" secondAttribute="height" multiplier="1:1" id="1AR-Xx-GL2"/>
-                                            <constraint firstAttribute="height" constant="76" id="i1B-Je-bvL"/>
-                                        </constraints>
-                                        <state key="normal" title="clack" image="shift0">
-                                            <color key="titleShadowColor" red="0.31907645029999998" green="0.34483539169999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="clack:" destination="BYZ-38-t0r" eventType="touchDown" id="4D3-EF-uaD"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="6sJ-Qd-1V2" secondAttribute="trailing" constant="17" id="8zd-n4-mG7"/>
-                                    <constraint firstItem="6sJ-Qd-1V2" firstAttribute="top" secondItem="zlF-R3-Hbr" secondAttribute="top" constant="19" id="Ejb-gs-Osi"/>
-                                    <constraint firstItem="oew-hb-zVx" firstAttribute="top" secondItem="zlF-R3-Hbr" secondAttribute="top" constant="17" id="iMg-tC-Zvh"/>
-                                    <constraint firstItem="jEV-Bc-LPn" firstAttribute="centerX" secondItem="zlF-R3-Hbr" secondAttribute="centerX" id="kO3-am-Cox"/>
-                                    <constraint firstItem="oew-hb-zVx" firstAttribute="leading" secondItem="zlF-R3-Hbr" secondAttribute="leading" constant="12" id="lSl-dI-Q3C"/>
-                                    <constraint firstAttribute="bottom" secondItem="jEV-Bc-LPn" secondAttribute="bottom" constant="45" id="yd4-DA-jke"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUm-w8-hpD" userLabel="preview">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
@@ -168,6 +120,58 @@
                                     <constraint firstAttribute="bottom" secondItem="13U-fX-r1k" secondAttribute="bottom" constant="25" id="zO2-OL-pG1"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zlF-R3-Hbr" userLabel="cameraView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sJ-Qd-1V2" userLabel="swap">
+                                        <rect key="frame" x="360" y="19" width="37" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="6sJ-Qd-1V2" secondAttribute="height" multiplier="1:1" id="Zzh-Kx-NpA"/>
+                                            <constraint firstAttribute="height" constant="37" id="dgq-eH-EAJ"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="switch"/>
+                                        <connections>
+                                            <action selector="switchCam:" destination="BYZ-38-t0r" eventType="touchDown" id="qMy-r0-yIm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oew-hb-zVx" userLabel="torch">
+                                        <rect key="frame" x="12" y="17" width="49" height="49"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="49" id="Vow-Wd-Sit"/>
+                                            <constraint firstAttribute="height" constant="49" id="gea-wu-x9f"/>
+                                        </constraints>
+                                        <state key="normal" title="flash" image="flash"/>
+                                        <connections>
+                                            <action selector="torch:" destination="BYZ-38-t0r" eventType="touchDown" id="Uhz-7J-Ra0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEV-Bc-LPn" userLabel="klack">
+                                        <rect key="frame" x="169" y="615" width="76" height="76"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="jEV-Bc-LPn" secondAttribute="height" multiplier="1:1" id="1AR-Xx-GL2"/>
+                                            <constraint firstAttribute="height" constant="76" id="i1B-Je-bvL"/>
+                                        </constraints>
+                                        <state key="normal" title="clack" image="shift0">
+                                            <color key="titleShadowColor" red="0.31907645029999998" green="0.34483539169999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clack:" destination="BYZ-38-t0r" eventType="touchDown" id="4D3-EF-uaD"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="focus" translatesAutoresizingMaskIntoConstraints="NO" id="Yle-Ai-2LY">
+                                        <rect key="frame" x="52" y="149" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="6sJ-Qd-1V2" secondAttribute="trailing" constant="17" id="8zd-n4-mG7"/>
+                                    <constraint firstItem="6sJ-Qd-1V2" firstAttribute="top" secondItem="zlF-R3-Hbr" secondAttribute="top" constant="19" id="Ejb-gs-Osi"/>
+                                    <constraint firstItem="oew-hb-zVx" firstAttribute="top" secondItem="zlF-R3-Hbr" secondAttribute="top" constant="17" id="iMg-tC-Zvh"/>
+                                    <constraint firstItem="jEV-Bc-LPn" firstAttribute="centerX" secondItem="zlF-R3-Hbr" secondAttribute="centerX" id="kO3-am-Cox"/>
+                                    <constraint firstItem="oew-hb-zVx" firstAttribute="leading" secondItem="zlF-R3-Hbr" secondAttribute="leading" constant="12" id="lSl-dI-Q3C"/>
+                                    <constraint firstAttribute="bottom" secondItem="jEV-Bc-LPn" secondAttribute="bottom" constant="45" id="yd4-DA-jke"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -194,6 +198,7 @@
                         <outlet property="bottom" destination="a8P-Uf-Iru" id="cLT-y1-ru3"/>
                         <outlet property="cameraView" destination="zlF-R3-Hbr" id="9T8-zO-zet"/>
                         <outlet property="clack" destination="jEV-Bc-LPn" id="FQ0-Lj-WeA"/>
+                        <outlet property="focusView" destination="Yle-Ai-2LY" id="5YL-kP-1bH"/>
                         <outlet property="preview" destination="tUm-w8-hpD" id="Ufi-NN-Tct"/>
                         <outlet property="savedView" destination="Rwd-VO-hF5" id="dZb-HY-tSz"/>
                         <outlet property="top" destination="0pg-mc-wqQ" id="JpG-Jh-iPB"/>
@@ -217,6 +222,7 @@
         <image name="cancel" width="128" height="128"/>
         <image name="facebook" width="128" height="128"/>
         <image name="flash" width="128" height="128"/>
+        <image name="focus" width="128" height="128"/>
         <image name="instagram" width="128" height="128"/>
         <image name="save" width="128" height="128"/>
         <image name="shift0" width="250" height="250"/>
