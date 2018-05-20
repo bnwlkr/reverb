@@ -61,54 +61,22 @@ extension UIView {
         })
     }
 }
-/*
+
+
 extension UIImage {
-    func rotatedBy(radians: CGFloat) -> UIImage {
-        let rotatedViewBox = UIView(frame: CGRect(x: 0,y: 0, width: self.size.width, height: self.size.height))
-        rotatedViewBox.transform = CGAffineTransform(rotationAngle: radians)
-        let rotatedSize = rotatedViewBox.frame.size
-        UIGraphicsBeginImageContext(rotatedViewBox.frame.size)
-        let bitmap = UIGraphicsGetCurrentContext()!
-        bitmap.translateBy(x: rotatedSize.width, y: rotatedSize.height)
-        bitmap.rotate(by: radians)
-        //bitmap.scaleBy(x: 1.0, y: -1.0)
-        bitmap.draw(self.cgImage!, in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext();
-        return newImage
-    }
-}
- */
-extension UIImage {
-    public func rotatedBy(radians: CGFloat, flip: Bool) -> UIImage {
-        
-        // calculate the size of the rotated view's containing box for our drawing space
+    public func rotatedBy(radians: CGFloat) -> UIImage {
         let rotatedViewBox = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
         let t = CGAffineTransform(rotationAngle: radians);
         rotatedViewBox.transform = t
         let rotatedSize = rotatedViewBox.frame.size
         UIGraphicsBeginImageContext(rotatedSize)
         let bitmap = UIGraphicsGetCurrentContext()
-
         bitmap!.translateBy(x: rotatedSize.width / 2.0, y: rotatedSize.height / 2.0)
-        
-        //   // Rotate the image context
         bitmap!.rotate(by: radians)
-        
-        // Now, draw the rotated/scaled image into the context
-        var yFlip: CGFloat
-        
-        if(flip){
-            yFlip = CGFloat(-1.0)
-        } else {
-            yFlip = CGFloat(1.0)
-        }
-        
-        bitmap!.scaleBy(x: yFlip, y: -1.0)
+        bitmap!.scaleBy(x: 1.0, y: -1.0)
         bitmap?.draw(cgImage!, in: CGRect(x: -size.width / 2, y: -size.height / 2, width: size.width, height: size.height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-        
         return newImage
     }
 }

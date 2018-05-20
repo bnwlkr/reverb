@@ -158,7 +158,6 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
                     }
                 }, true)
                 })
-            
         default:
             break
         }
@@ -175,7 +174,6 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
             self.displaySaved({}, false)
         })
     }
-    
     
     func displaySaved (_ completion: @escaping ()->(), _ share: Bool) {
         DispatchQueue.main.async {
@@ -217,7 +215,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     
     func setButtonShadows  () {
         for button in buttons {
-            button.layer.shadowOpacity = 0.2
+            button.layer.shadowOpacity = 0.5
             button.layer.shadowRadius = 0.8
         }
     }

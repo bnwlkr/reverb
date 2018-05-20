@@ -28,13 +28,11 @@ class MediaManager: NSObject, UIDocumentInteractionControllerDelegate {
         default:
             break
         }
-        debugPrint(angle)
         for image in images {
-            ret.append(image.rotatedBy(radians: angle, flip: false))
+            ret.append(image.rotatedBy(radians: angle))
         }
         return ret
     }
-    
 }
 
 
@@ -64,8 +62,6 @@ struct RenderSettings {
     }
     
     var outputURL: URL {
-        // Use the CachesDirectory so the rendered video file sticks around as long as we need it to.
-        // Using the CachesDirectory ensures the file won't be included in a backup of the app.
         let fileManager = FileManager.default
         if let tmpDirURL = try? fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true) {
             return tmpDirURL.appendingPathComponent(videoFilename).appendingPathExtension(videoFilenameExt)
@@ -109,10 +105,7 @@ class ImageAnimator {
 
     
     func save(completion: @escaping (URL?)->Void) {
-        
-        // The VideoWriter will fail if a file exists at the URL, so clear it out first.
         ImageAnimator.removeFileAtURL(fileURL: settings.outputURL)
-        
         videoWriter.start()
         videoWriter.render(appendPixelBuffers: appendPixelBuffers) {
             ImageAnimator.saveToLibrary(videoURL: self.settings.outputURL, completion:  completion)
@@ -120,8 +113,6 @@ class ImageAnimator {
         
     }
     
-    
-    // This is the callback function for VideoWriter.render()
     func appendPixelBuffers(writer: VideoWriter) -> Bool {
         
         let frameDuration = CMTimeMake(Int64(ImageAnimator.kTimescale / settings.fps), ImageAnimator.kTimescale)
@@ -132,7 +123,6 @@ class ImageAnimator {
                 // Inform writer we have more buffers to write.
                 return false
             }
-            
             let image = images.removeFirst()
             let presentationTime = CMTimeMultiply(frameDuration, Int32(frameNum))
             let success = videoWriter.addImage(image: image, withPresentationTime: presentationTime)
@@ -142,8 +132,6 @@ class ImageAnimator {
             
             frameNum+=1
         }
-        
-        // Inform writer all buffers have been written.
         return true
     }
     
@@ -168,31 +156,21 @@ class VideoWriter {
         if status != kCVReturnSuccess {
             fatalError("CVPixelBufferPoolCreatePixelBuffer() failed")
         }
-        
         let pixelBuffer = pixelBufferOut!
-        
         CVPixelBufferLockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
-        
         let data = CVPixelBufferGetBaseAddress(pixelBuffer)
         let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
         let context = CGContext(data: data, width: Int(size.width), height: Int(size.height),
                                 bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue)
-        
         context!.clear(CGRect(x: 0, y: 0, width: size.width, height: size.height))
-        
         let horizontalRatio = size.width / image.size.width
         let verticalRatio = size.height / image.size.height
-        //aspectRatio = max(horizontalRatio, verticalRatio) // ScaleAspectFill
         let aspectRatio = min(horizontalRatio, verticalRatio) // ScaleAspectFit
-        
         let newSize = CGSize(width: image.size.width * aspectRatio, height: image.size.height * aspectRatio)
-        
         let x = newSize.width < size.width ? (size.width - newSize.width) / 2 : 0
         let y = newSize.height < size.height ? (size.height - newSize.height) / 2 : 0
-        
         context!.draw(image.cgImage!, in: CGRect(x: x, y: y, width: newSize.width, height: newSize.height))
         CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
-        
         return pixelBuffer
     }
     
@@ -239,16 +217,11 @@ class VideoWriter {
         else {
             fatalError("canAddInput() returned false")
         }
-        
-        // The pixel buffer adaptor must be created before we start writing.
         createPixelBufferAdaptor()
-        
         if videoWriter.startWriting() == false {
             fatalError("startWriting() failed")
         }
-        
         videoWriter.startSession(atSourceTime: kCMTimeZero)
-        
         precondition(pixelBufferAdaptor.pixelBufferPool != nil, "nil pixelBufferPool")
     }
     
@@ -267,16 +240,12 @@ class VideoWriter {
                     }
                 }
             }
-            else {
-                // Fall through. The closure will be called again when the writer is ready.
-            }
+            else {}
         }
     }
     
     func addImage(image: UIImage, withPresentationTime presentationTime: CMTime) -> Bool {
-        
         precondition(pixelBufferAdaptor != nil, "Call start() to initialze the writer")
-        
         let pixelBuffer = VideoWriter.pixelBufferFromImage(image: image, pixelBufferPool: pixelBufferAdaptor.pixelBufferPool!, size: renderSettings.size)
         return pixelBufferAdaptor.append(pixelBuffer, withPresentationTime: presentationTime)
     }
