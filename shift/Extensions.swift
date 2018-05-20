@@ -62,6 +62,27 @@ extension UIView {
     }
 }
 
+extension UIImage {
+    func imageRotatedByDegrees(radians: CGFloat) -> UIImage {
+        
+        let rotatedViewBox = UIView(frame: CGRect(x: 0,y: 0, width: self.size.width, height: self.size.height))
+        rotatedViewBox.transform = CGAffineTransform(rotationAngle: radians)
+        let rotatedSize = rotatedViewBox.frame.size
+        
+        UIGraphicsBeginImageContext(rotatedViewBox.frame.size)
+        let bitmap = UIGraphicsGetCurrentContext()!
+        
+        bitmap.translateBy(x: rotatedSize.width, y: rotatedSize.height)
+        bitmap.rotate(by: radians)
+        bitmap.scaleBy(x: 1.0, y: -1.0)
+        bitmap.draw(self.cgImage!, in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext();
+        
+        return newImage
+    }
+}
 
 
 
