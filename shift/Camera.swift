@@ -24,6 +24,14 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     var latest: UIImage?
     var delegate: CameraDelegate?
     var videoView: UIView!
+    var orientationLock = false
+    private var _orientation: AVCaptureVideoOrientation!
+    var orientation: AVCaptureVideoOrientation! {
+        set {
+            if orientationLock {return}
+            _orientation = newValue
+        } get { return _orientation }
+    }
     
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -61,6 +69,19 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             session.addInput(try AVCaptureDeviceInput(device: currentCam!))
             setupConnection(mode: currentCam!.position)
         } catch {print(error)}
+    }
+    
+    func setOrientation () {
+        switch (UIDevice.current.orientation) {
+        case .portrait:
+            orientation = .portrait
+        case .landscapeLeft:
+            orientation = .landscapeLeft
+        case .landscapeRight:
+            orientation = .landscapeRight
+        default:
+            orientation = .portrait
+        }
     }
     
     

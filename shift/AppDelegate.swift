@@ -9,8 +9,6 @@
 import UIKit
 import CoreData
 
-let FPS = 16
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

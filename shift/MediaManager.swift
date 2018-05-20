@@ -10,23 +10,51 @@ enum Social  {
 }
 
 class MediaManager: NSObject, UIDocumentInteractionControllerDelegate {
-    func save (settings: RenderSettings, images: [UIImage], completion: @escaping (URL?) -> ()) {
+    func save (settings: RenderSettings, images: [UIImage], orientation: AVCaptureVideoOrientation, completion: @escaping (URL?) -> ()) {
         let imageAnimator = ImageAnimator(renderSettings: settings)
-        imageAnimator.images = images.reflect().repeated(times: 8)
+        let rotatedImages = rotateImages(with: orientation, images: images)
+        imageAnimator.images = rotatedImages.reflect().repeated(times: 8)
         imageAnimator.save(completion: completion)
     }
-}
     
+    func rotateImages (with orientation: AVCaptureVideoOrientation, images: [UIImage]) -> [UIImage] {
+        var angle:CGFloat = 0
+        var ret = [UIImage]()
+        switch(orientation) {
+        case .landscapeLeft:
+            angle = CGFloat(-Double.pi/2)
+        case .landscapeRight:
+            angle = CGFloat(Double.pi/2)
+        default:
+            break
+        }
+        debugPrint(angle)
+        for image in images {
+            ret.append(image.rotatedBy(radians: angle, flip: false))
+        }
+        return ret
+    }
+    
+}
+
 
 struct RenderSettings {
-    init(fps: Int32, width: CGFloat, height: CGFloat) {
-        self.fps=fps
-        self.width=width
-        self.height=height
+    
+    init(orientation: AVCaptureVideoOrientation, fps: Int32) {
+        self.fps = fps
+        switch (orientation) {
+        case .portrait:
+           self.width = UIScreen.main.bounds.width
+           self.height = UIScreen.main.bounds.height
+        default:
+            self.width = UIScreen.main.bounds.height
+            self.height = UIScreen.main.bounds.width
+            
+        }
     }
+    var fps: Int32!
     var width: CGFloat!
     var height: CGFloat!
-    var fps: Int32!
     var videoFilename = "render"
     var videoFilenameExt = "mp4"
     var avCodecKey = AVVideoCodecType.h264

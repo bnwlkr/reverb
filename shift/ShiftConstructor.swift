@@ -9,11 +9,14 @@
 import UIKit
 import CoreImage
 
+
+
 class ShiftConstructor: NSObject {
     var frames = [UIImage]()
     var delegate: ShiftConstructorDelegate?
     let context = CIContext()
     let frameCount = 3
+    let fps: Int32 = 18
     
     func add(image: UIImage) {
         frames.append(image)
@@ -27,7 +30,7 @@ class ShiftConstructor: NSObject {
     }
     
     func display () -> UIImage  {
-        let duration = Double(frameCount*2)/Double(FPS)
+        let duration = Double(frameCount*2)/Double(fps)
         return UIImage.animatedImage(with: frames.reflect(), duration: duration)!
     }
     

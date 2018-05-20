@@ -40,12 +40,12 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         return .portrait
     }
     
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         shifter.delegate = self
         camera.delegate = self
+        camera.setOrientation()
         camera.setup(videoView: view)
         top.alpha = 0.6
         preview.isHidden=true
@@ -60,6 +60,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     }
     
     @objc func rotated () {
+        camera.setOrientation()
         for button in buttons {
             button.rotate(to: UIDevice.current.orientation)
         }
@@ -92,6 +93,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     }
     
     @IBAction func exitPreview(_ sender: UIButton) {
+        camera.orientationLock = false
         if (torchOn) {
             torchOn=false
             torch(nil)
@@ -115,7 +117,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     
     
     @IBAction func clack(_ sender: UIButton) {
-        debugPrint(UIDevice.current.orientation == .portrait)
+        camera.orientationLock = true
         clack.setImage(clacks[shifter.frames.count+1], for: .normal)
         let next = camera.latest!
         top.image = shifter.applyFilter(image1: CIImage(image: next)!, filterName: "CIEdges")
@@ -164,8 +166,8 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     
     func _save(completion: @escaping (URL?)->()) {
         savingView.startAnimating()
-        let settings = RenderSettings(fps: Int32(FPS), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        mediaManager.save(settings: settings, images: shifter.frames, completion: completion)
+        let settings = RenderSettings(orientation: camera.orientation, fps: shifter.fps)
+        mediaManager.save(settings: settings, images: shifter.frames, orientation: camera.orientation, completion: completion)
     }
     
     @IBAction func save(_ sender: Any) {
