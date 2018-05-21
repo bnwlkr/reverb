@@ -11,8 +11,6 @@ import AVFoundation
 import Photos
 
 class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDelegate, UIDocumentInteractionControllerDelegate {
-    
-    
 
     @IBOutlet weak var savingView: UIActivityIndicatorView!
     @IBOutlet weak var focusView: UIImageView!
@@ -31,6 +29,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     var locked = false
     var torchOn = false
     let clacks = [#imageLiteral(resourceName: "shift0"), #imageLiteral(resourceName: "shift1"), #imageLiteral(resourceName: "shift2"), #imageLiteral(resourceName: "shift3")]
+    var level = Level(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
   
     override var prefersStatusBarHidden: Bool {
         return true
@@ -43,6 +42,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        level.start()
         shifter.delegate = self
         camera.delegate = self
         camera.setOrientation()
