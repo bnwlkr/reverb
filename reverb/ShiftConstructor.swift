@@ -1,6 +1,6 @@
 //
 //  ShiftConstructor.swift
-//  shift
+//  reverb
 //
 //  Created by Ben Walker on 2018-05-10.
 //  Copyright © 2018 Ben Walker. All rights reserved.
@@ -21,7 +21,7 @@ class ShiftConstructor: NSObject {
     func add(image: UIImage) {
         frames.append(image)
         if (frames.count == frameCount) {
-            delegate?.shiftConstructorFull()
+            delegate?.reverbConstructorFull()
         }
     }
 
@@ -49,7 +49,7 @@ class ShiftConstructor: NSObject {
 }
 
 protocol ShiftConstructorDelegate {
-    func shiftConstructorFull ()
+    func reverbConstructorFull ()
 }
 
 

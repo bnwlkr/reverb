@@ -22,7 +22,7 @@
 /* Begin PBXFileReference section */
 		FF4FA76220A6E9B700704107 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FF4FA76E20A9186A00704107 /* MediaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
-		FF7CD54E20A642A40010436C /* shift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF7CD54E20A642A40010436C /* reverb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = reverb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFAD11D220A3FF1300E2EBEE /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		FFCB20A320B3B39400F1D74F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFD0F10920A4D318000BDFD7 /* ShiftConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftConstructor.swift; sourceTree = "<group>"; };
@@ -48,12 +48,12 @@
 		FFDE86E820A3C2A100D5EEE1 = {
 			isa = PBXGroup;
 			children = (
-				FFDE86F320A3C2A100D5EEE1 /* shift */,
-				FF7CD54E20A642A40010436C /* shift.app */,
+				FFDE86F320A3C2A100D5EEE1 /* reverb */,
+				FF7CD54E20A642A40010436C /* reverb.app */,
 			);
 			sourceTree = "<group>";
 		};
-		FFDE86F320A3C2A100D5EEE1 /* shift */ = {
+		FFDE86F320A3C2A100D5EEE1 /* reverb */ = {
 			isa = PBXGroup;
 			children = (
 				FFDE86F420A3C2A100D5EEE1 /* AppDelegate.swift */,
@@ -68,15 +68,15 @@
 				FFDE870020A3C2A200D5EEE1 /* LaunchScreen.storyboard */,
 				FFDE870320A3C2A200D5EEE1 /* Info.plist */,
 			);
-			path = shift;
+			path = reverb;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FFDE86F020A3C2A100D5EEE1 /* shift */ = {
+		FFDE86F020A3C2A100D5EEE1 /* reverb */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FFDE870620A3C2A200D5EEE1 /* Build configuration list for PBXNativeTarget "shift" */;
+			buildConfigurationList = FFDE870620A3C2A200D5EEE1 /* Build configuration list for PBXNativeTarget "reverb" */;
 			buildPhases = (
 				FFDE86ED20A3C2A100D5EEE1 /* Sources */,
 				FFDE86EE20A3C2A100D5EEE1 /* Frameworks */,
@@ -86,9 +86,9 @@
 			);
 			dependencies = (
 			);
-			name = shift;
-			productName = shift;
-			productReference = FF7CD54E20A642A40010436C /* shift.app */;
+			name = reverb;
+			productName = reverb;
+			productReference = FF7CD54E20A642A40010436C /* reverb.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -107,7 +107,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FFDE86EC20A3C2A100D5EEE1 /* Build configuration list for PBXProject "shift" */;
+			buildConfigurationList = FFDE86EC20A3C2A100D5EEE1 /* Build configuration list for PBXProject "reverb" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -120,7 +120,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FFDE86F020A3C2A100D5EEE1 /* shift */,
+				FFDE86F020A3C2A100D5EEE1 /* reverb */,
 			);
 		};
 /* End PBXProject section */
@@ -294,10 +294,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7ST5D3QZ2;
-				INFOPLIST_FILE = shift/Info.plist;
+				INFOPLIST_FILE = reverb/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = bnwlkr.shift;
+				PRODUCT_BUNDLE_IDENTIFIER = bnwlkr.reverb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -310,10 +310,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7ST5D3QZ2;
-				INFOPLIST_FILE = shift/Info.plist;
+				INFOPLIST_FILE = reverb/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = bnwlkr.shift;
+				PRODUCT_BUNDLE_IDENTIFIER = bnwlkr.reverb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -323,7 +323,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FFDE86EC20A3C2A100D5EEE1 /* Build configuration list for PBXProject "shift" */ = {
+		FFDE86EC20A3C2A100D5EEE1 /* Build configuration list for PBXProject "reverb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FFDE870420A3C2A200D5EEE1 /* Debug */,
@@ -332,7 +332,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FFDE870620A3C2A200D5EEE1 /* Build configuration list for PBXNativeTarget "shift" */ = {
+		FFDE870620A3C2A200D5EEE1 /* Build configuration list for PBXNativeTarget "reverb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FFDE870720A3C2A200D5EEE1 /* Debug */,

@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  shift
+//  reverb
 //
 //  Created by Ben Walker on 2018-05-09.
 //  Copyright © 2018 Ben Walker. All rights reserved.
@@ -29,7 +29,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     var activityView: UIActivityViewController!
     let camera = Camera()
     let mediaManager = MediaManager()
-    let shifter = ShiftConstructor()
+    let reverber = ShiftConstructor()
     var locked = false
     var torchOn = false
     let clacks = [#imageLiteral(resourceName: "shift0"), #imageLiteral(resourceName: "shift1"), #imageLiteral(resourceName: "shift2"), #imageLiteral(resourceName: "shift3")]
@@ -48,7 +48,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     override func viewDidLoad() {
         super.viewDidLoad()
         level = Level(imageView: levelView)
-        shifter.delegate = self
+        reverber.delegate = self
         camera.delegate = self
         camera.setOrientation()
         camera.setup(videoView: view)
@@ -88,13 +88,13 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         savedView.rotate(to: UIDevice.current.orientation)
     }
     
-    func shiftConstructorFull () {
+    func reverbConstructorFull () {
         camera.stop()
         locked = true
         top.image = nil
         preview.isHidden=false
         cameraView.isHidden=true
-        bottom.image = shifter.display()
+        bottom.image = reverber.display()
     }
     
     func cameraStream(_ image: UIImage) {
@@ -122,7 +122,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         clack.setImage(clacks[0], for: .normal)
         preview.isHidden=true
         cameraView.isHidden=false
-        shifter.clear()
+        reverber.clear()
         camera.start()
         locked = false
     }
@@ -141,9 +141,9 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         if let next = camera.latest {
             camera.outputSize = CGSize(width: (next.cgImage?.width)!, height: (next.cgImage?.height)!)
             camera.orientationLock = true
-            clack.setImage(clacks[shifter.frames.count+1], for: .normal)
-            top.image = shifter.topMap(image: CIImage(image: next)!)
-            delay(0.001, closure: {self.shifter.add(image: next)})
+            clack.setImage(clacks[reverber.frames.count+1], for: .normal)
+            top.image = reverber.topMap(image: CIImage(image: next)!)
+            delay(0.001, closure: {self.reverber.add(image: next)})
         }
     }
     
@@ -188,8 +188,8 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     
     func _save(completion: @escaping (URL?)->()) {
         savingView.startAnimating()
-        let settings = RenderSettings(orientation: camera.orientation, fps: shifter.fps, outSize: camera.outputSize!)
-        mediaManager.save(settings: settings, images: shifter.frames, orientation: camera.orientation, completion: completion)
+        let settings = RenderSettings(orientation: camera.orientation, fps: reverber.fps, outSize: camera.outputSize!)
+        mediaManager.save(settings: settings, images: reverber.frames, orientation: camera.orientation, completion: completion)
     }
     
     @IBAction func save(_ sender: Any) {

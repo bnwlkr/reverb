@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FFDE86F020A3C2A100D5EEE1"
-               BuildableName = "shift.app"
-               BlueprintName = "shift"
-               ReferencedContainer = "container:shift.xcodeproj">
+               BuildableName = "reverb.app"
+               BlueprintName = "reverb"
+               ReferencedContainer = "container:reverb.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FFDE86F020A3C2A100D5EEE1"
-            BuildableName = "shift.app"
-            BlueprintName = "shift"
-            ReferencedContainer = "container:shift.xcodeproj">
+            BuildableName = "reverb.app"
+            BlueprintName = "reverb"
+            ReferencedContainer = "container:reverb.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FFDE86F020A3C2A100D5EEE1"
-            BuildableName = "shift.app"
-            BlueprintName = "shift"
-            ReferencedContainer = "container:shift.xcodeproj">
+            BuildableName = "reverb.app"
+            BlueprintName = "reverb"
+            ReferencedContainer = "container:reverb.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -82,9 +82,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FFDE86F020A3C2A100D5EEE1"
-            BuildableName = "shift.app"
-            BlueprintName = "shift"
-            ReferencedContainer = "container:shift.xcodeproj">
+            BuildableName = "reverb.app"
+            BlueprintName = "reverb"
+            ReferencedContainer = "container:reverb.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

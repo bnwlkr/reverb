@@ -13,7 +13,7 @@
         <!--Cam View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CamViewController" customModule="shift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CamViewController" customModule="reverb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,11 +34,12 @@
                                         <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </activityIndicatorView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="33M-x9-sW9" userLabel="exit">
-                                        <rect key="frame" x="16" y="17" width="28" height="28"/>
+                                        <rect key="frame" x="16" y="17" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="33M-x9-sW9" secondAttribute="height" multiplier="1:1" id="55h-wE-PHt"/>
-                                            <constraint firstAttribute="height" constant="28" id="Iao-Zl-cz5"/>
+                                            <constraint firstAttribute="height" constant="35" id="Iao-Zl-cz5"/>
                                         </constraints>
+                                        <inset key="contentEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
                                         <state key="normal" title="Button" image="cancel"/>
                                         <connections>
                                             <action selector="exitPreview:" destination="BYZ-38-t0r" eventType="touchDown" id="cqv-Rz-q42"/>
