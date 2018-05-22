@@ -11,7 +11,11 @@ import AVFoundation
 import Photos
 
 class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDelegate, UIDocumentInteractionControllerDelegate {
-
+    @IBOutlet weak var exitLead: NSLayoutConstraint!
+    @IBOutlet weak var exitTrail: NSLayoutConstraint!
+    @IBOutlet weak var torchLead: NSLayoutConstraint!
+    @IBOutlet weak var torchTrail: NSLayoutConstraint!
+    @IBOutlet weak var levelView: UIImageView!
     @IBOutlet weak var savingView: UIActivityIndicatorView!
     @IBOutlet weak var focusView: UIImageView!
     @IBOutlet weak var savedView: UIVisualEffectView!
@@ -29,8 +33,9 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     var locked = false
     var torchOn = false
     let clacks = [#imageLiteral(resourceName: "shift0"), #imageLiteral(resourceName: "shift1"), #imageLiteral(resourceName: "shift2"), #imageLiteral(resourceName: "shift3")]
-    var level = Level(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    var level: Level!
   
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -42,7 +47,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        level.start()
+        level = Level(imageView: levelView)
         shifter.delegate = self
         camera.delegate = self
         camera.setOrientation()
@@ -52,14 +57,30 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         setButtonShadows()
         savingView.stopAnimating()
         NotificationCenter.default.addObserver(self, selector: #selector(CamViewController.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        level.start()
         camera.start()
     }
     
     @objc func rotated () {
+        switch (UIDevice.current.orientation) {
+        case .landscapeRight:
+            torchLead.priority = .defaultHigh
+            torchTrail.priority = .defaultLow
+        case .landscapeLeft:
+            exitLead.priority = .defaultLow
+            exitTrail.priority = .defaultHigh
+        default:
+            torchLead.priority = .defaultLow
+            torchTrail.priority = .defaultHigh
+            exitLead.priority = .defaultHigh
+            exitTrail.priority = .defaultLow
+        }
+ 
         camera.setOrientation()
         for button in buttons {
             button.rotate(to: UIDevice.current.orientation)
@@ -117,6 +138,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     
     
     @IBAction func clack(_ sender: UIButton) {
+        camera.outputSize = CGSize(width: (camera.latest?.cgImage?.width)!, height: (camera.latest?.cgImage?.height)!)
         camera.orientationLock = true
         clack.setImage(clacks[shifter.frames.count+1], for: .normal)
         let next = camera.latest!
@@ -165,7 +187,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     
     func _save(completion: @escaping (URL?)->()) {
         savingView.startAnimating()
-        let settings = RenderSettings(orientation: camera.orientation, fps: shifter.fps)
+        let settings = RenderSettings(orientation: camera.orientation, fps: shifter.fps, outSize: camera.outputSize!)
         mediaManager.save(settings: settings, images: shifter.frames, orientation: camera.orientation, completion: completion)
     }
     
@@ -215,7 +237,7 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     
     func setButtonShadows  () {
         for button in buttons {
-            button.layer.shadowOpacity = 0.5
+            button.layer.shadowOpacity = 0.3
             button.layer.shadowRadius = 0.8
         }
     }

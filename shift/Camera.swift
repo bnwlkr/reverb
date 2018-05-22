@@ -25,6 +25,13 @@ class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     var delegate: CameraDelegate?
     var videoView: UIView!
     var orientationLock = false
+    var _outputSize: CGSize?
+    var outputSize: CGSize? {
+        set {
+        if _outputSize == nil { _outputSize=newValue }
+        }
+        get { return _outputSize }
+    }
     private var _orientation: AVCaptureVideoOrientation!
     var orientation: AVCaptureVideoOrientation! {
         set {

@@ -10,11 +10,11 @@
 		FF4FA76320A6E9B700704107 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA76220A6E9B700704107 /* Extensions.swift */; };
 		FF4FA76F20A9186A00704107 /* MediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4FA76E20A9186A00704107 /* MediaManager.swift */; };
 		FFAD11D320A3FF1300E2EBEE /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAD11D220A3FF1300E2EBEE /* Camera.swift */; };
+		FFCB20A420B3B39400F1D74F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFCB20A320B3B39400F1D74F /* Assets.xcassets */; };
 		FFD0F10A20A4D318000BDFD7 /* ShiftConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD0F10920A4D318000BDFD7 /* ShiftConstructor.swift */; };
 		FFDE86F520A3C2A100D5EEE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE86F420A3C2A100D5EEE1 /* AppDelegate.swift */; };
 		FFDE86F720A3C2A100D5EEE1 /* CamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE86F620A3C2A100D5EEE1 /* CamViewController.swift */; };
 		FFDE86FA20A3C2A100D5EEE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDE86F820A3C2A100D5EEE1 /* Main.storyboard */; };
-		FFDE86FF20A3C2A200D5EEE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFDE86FE20A3C2A200D5EEE1 /* Assets.xcassets */; };
 		FFDE870220A3C2A200D5EEE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDE870020A3C2A200D5EEE1 /* LaunchScreen.storyboard */; };
 		FFF9CCA020AE973400E60797 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF9CC9F20AE973400E60797 /* Level.swift */; };
 /* End PBXBuildFile section */
@@ -24,11 +24,11 @@
 		FF4FA76E20A9186A00704107 /* MediaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaManager.swift; sourceTree = "<group>"; };
 		FF7CD54E20A642A40010436C /* shift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFAD11D220A3FF1300E2EBEE /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		FFCB20A320B3B39400F1D74F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFD0F10920A4D318000BDFD7 /* ShiftConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftConstructor.swift; sourceTree = "<group>"; };
 		FFDE86F420A3C2A100D5EEE1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFDE86F620A3C2A100D5EEE1 /* CamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamViewController.swift; sourceTree = "<group>"; };
 		FFDE86F920A3C2A100D5EEE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FFDE86FE20A3C2A200D5EEE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FFDE870120A3C2A200D5EEE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FFDE870320A3C2A200D5EEE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFF9CC9F20AE973400E60797 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 				FFAD11D220A3FF1300E2EBEE /* Camera.swift */,
 				FF4FA76220A6E9B700704107 /* Extensions.swift */,
 				FFDE86F820A3C2A100D5EEE1 /* Main.storyboard */,
-				FFDE86FE20A3C2A200D5EEE1 /* Assets.xcassets */,
+				FFCB20A320B3B39400F1D74F /* Assets.xcassets */,
 				FFDE870020A3C2A200D5EEE1 /* LaunchScreen.storyboard */,
 				FFDE870320A3C2A200D5EEE1 /* Info.plist */,
 			);
@@ -131,7 +131,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFDE870220A3C2A200D5EEE1 /* LaunchScreen.storyboard in Resources */,
-				FFDE86FF20A3C2A200D5EEE1 /* Assets.xcassets in Resources */,
+				FFCB20A420B3B39400F1D74F /* Assets.xcassets in Resources */,
 				FFDE86FA20A3C2A100D5EEE1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

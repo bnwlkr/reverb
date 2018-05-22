@@ -9,36 +9,48 @@
 import UIKit
 import CoreMotion
 
-class Level: UIView {
+class Level: NSObject {
     let motion = CMMotionManager()
-    var firstRefUpdate: Bool!
-    var ref: Double!
-    var maxWidth: CGFloat!
-    let maxDiff = 1.0
+    let greenRange = -0.1...0.1
+    var view: UIImageView!
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.maxWidth = frame.width/2.0
+    convenience init(imageView: UIImageView) {
+        self.init()
+        self.view = imageView
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     
     func start () {
-        firstRefUpdate=true
-        motion.deviceMotionUpdateInterval = 0.5
+        motion.deviceMotionUpdateInterval = 0.1
         motion.startDeviceMotionUpdates(to: OperationQueue.main, withHandler: {motion, error in
-            if let roll = motion?.attitude.roll {
-                if self.firstRefUpdate {
-                    self.ref=roll
-                    self.firstRefUpdate=false
+            var met: Double = 0.0
+            switch (UIDevice.current.orientation) {
+            case .landscapeLeft:
+                met = (motion?.attitude.pitch)! + Double.pi/2
+            case .landscapeRight:
+                met = (motion?.attitude.pitch)! - Double.pi/2
+            default:
+                met = (motion?.attitude.roll)!
+            }
+            
+            DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.1, animations: {
+                        self.view.transform = CGAffineTransform(rotationAngle: CGFloat(met))
+                    })
                 }
-                else {
-                    let diff = roll-self.ref
-                    let diffNorm = min(max(diff, -self.maxDiff), self.maxDiff)
-                    print (diffNorm)
-                }
+            var rangeMet: Double = 0.0
+            switch (UIDevice.current.orientation) {
+                case .landscapeLeft:
+                     rangeMet = met-Double.pi/2
+                case .landscapeRight:
+                    rangeMet = met+Double.pi/2
+                default:
+                    rangeMet = met
+            }
+            if self.greenRange ~= rangeMet {
+                self.view.image = #imageLiteral(resourceName: "levelgreen")
+            } else {
+                self.view.image = #imageLiteral(resourceName: "levelred")
             }
         })
     }

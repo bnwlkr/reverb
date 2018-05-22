@@ -34,10 +34,10 @@
                                         <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </activityIndicatorView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="33M-x9-sW9" userLabel="exit">
-                                        <rect key="frame" x="16" y="17" width="25" height="25"/>
+                                        <rect key="frame" x="16" y="17" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="33M-x9-sW9" secondAttribute="height" multiplier="1:1" id="55h-wE-PHt"/>
-                                            <constraint firstAttribute="height" constant="25" id="Iao-Zl-cz5"/>
+                                            <constraint firstAttribute="height" constant="32" id="Iao-Zl-cz5"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="cancel"/>
                                         <connections>
@@ -114,9 +114,10 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Nz9-om-kNL" secondAttribute="trailing" constant="36" id="5ZL-dw-Jrc"/>
-                                    <constraint firstItem="33M-x9-sW9" firstAttribute="leading" secondItem="tUm-w8-hpD" secondAttribute="leading" constant="16" id="5zR-Lx-rga"/>
+                                    <constraint firstItem="33M-x9-sW9" firstAttribute="leading" secondItem="tUm-w8-hpD" secondAttribute="leading" priority="750" constant="16" id="5zR-Lx-rga"/>
                                     <constraint firstItem="G1b-3j-Crg" firstAttribute="leading" secondItem="13U-fX-r1k" secondAttribute="leading" constant="63" id="6ZG-Sd-UnT"/>
                                     <constraint firstItem="13U-fX-r1k" firstAttribute="leading" secondItem="tUm-w8-hpD" secondAttribute="leading" constant="36" id="75b-Kf-LuW"/>
+                                    <constraint firstAttribute="trailing" secondItem="33M-x9-sW9" secondAttribute="trailing" priority="250" constant="16" id="7aa-nh-9BA"/>
                                     <constraint firstAttribute="bottom" secondItem="Nz9-om-kNL" secondAttribute="bottom" constant="25" id="Ieo-Qc-WpB"/>
                                     <constraint firstItem="33M-x9-sW9" firstAttribute="top" secondItem="tUm-w8-hpD" secondAttribute="top" constant="17" id="Vrb-Fz-7cM"/>
                                     <constraint firstItem="G1b-3j-Crg" firstAttribute="centerY" secondItem="13U-fX-r1k" secondAttribute="centerY" id="gHa-9u-L0d"/>
@@ -160,7 +161,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sJ-Qd-1V2" userLabel="swap">
-                                        <rect key="frame" x="286" y="639" width="27" height="27"/>
+                                        <rect key="frame" x="285" y="639" width="27" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="6sJ-Qd-1V2" secondAttribute="height" multiplier="1:1" id="a4W-WB-gKq"/>
                                             <constraint firstAttribute="height" constant="27" id="g4k-VG-b4o"/>
@@ -170,12 +171,22 @@
                                             <action selector="switchCam:" destination="BYZ-38-t0r" eventType="touchDown" id="qMy-r0-yIm"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5U4-Yj-SU5" userLabel="level">
+                                        <rect key="frame" x="84" y="651" width="45" height="4"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="5U4-Yj-SU5" secondAttribute="height" multiplier="45:4" id="asF-5J-7Sh"/>
+                                            <constraint firstAttribute="height" constant="4" id="s5Z-oW-vas"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="oew-hb-zVx" firstAttribute="top" secondItem="zlF-R3-Hbr" secondAttribute="top" constant="17" id="113-TD-PB9"/>
+                                    <constraint firstItem="oew-hb-zVx" firstAttribute="leading" secondItem="zlF-R3-Hbr" secondAttribute="leading" priority="250" constant="12" id="3Be-Ag-6Oq"/>
                                     <constraint firstItem="6sJ-Qd-1V2" firstAttribute="centerY" secondItem="jEV-Bc-LPn" secondAttribute="centerY" id="H2b-V3-l2T"/>
-                                    <constraint firstAttribute="trailing" secondItem="oew-hb-zVx" secondAttribute="trailing" constant="12" id="QIn-bH-6AC"/>
-                                    <constraint firstItem="6sJ-Qd-1V2" firstAttribute="leading" secondItem="jEV-Bc-LPn" secondAttribute="trailing" constant="41" id="fSQ-i9-j9a"/>
+                                    <constraint firstAttribute="bottom" secondItem="5U4-Yj-SU5" secondAttribute="bottom" constant="81" id="KGH-x9-RGC"/>
+                                    <constraint firstAttribute="trailing" secondItem="oew-hb-zVx" secondAttribute="trailing" priority="750" constant="12" id="QIn-bH-6AC"/>
+                                    <constraint firstItem="jEV-Bc-LPn" firstAttribute="leading" secondItem="5U4-Yj-SU5" secondAttribute="trailing" constant="40" id="R1K-Ka-h0b"/>
+                                    <constraint firstItem="6sJ-Qd-1V2" firstAttribute="leading" secondItem="jEV-Bc-LPn" secondAttribute="trailing" constant="40" id="fSQ-i9-j9a"/>
                                     <constraint firstItem="jEV-Bc-LPn" firstAttribute="centerX" secondItem="zlF-R3-Hbr" secondAttribute="centerX" id="kO3-am-Cox"/>
                                     <constraint firstAttribute="bottom" secondItem="jEV-Bc-LPn" secondAttribute="bottom" constant="45" id="yd4-DA-jke"/>
                                 </constraints>
@@ -206,12 +217,17 @@
                         <outlet property="bottom" destination="a8P-Uf-Iru" id="cLT-y1-ru3"/>
                         <outlet property="cameraView" destination="zlF-R3-Hbr" id="9T8-zO-zet"/>
                         <outlet property="clack" destination="jEV-Bc-LPn" id="FQ0-Lj-WeA"/>
+                        <outlet property="exitLead" destination="5zR-Lx-rga" id="e09-5R-UR4"/>
+                        <outlet property="exitTrail" destination="7aa-nh-9BA" id="8tU-K2-g4H"/>
                         <outlet property="focusView" destination="Yle-Ai-2LY" id="5YL-kP-1bH"/>
+                        <outlet property="levelView" destination="5U4-Yj-SU5" id="5R6-nN-mNj"/>
                         <outlet property="preview" destination="tUm-w8-hpD" id="Ufi-NN-Tct"/>
                         <outlet property="savedView" destination="Rwd-VO-hF5" id="dZb-HY-tSz"/>
                         <outlet property="savingView" destination="H3E-dh-ABS" id="gO2-H5-p5t"/>
                         <outlet property="top" destination="0pg-mc-wqQ" id="JpG-Jh-iPB"/>
                         <outlet property="torch" destination="oew-hb-zVx" id="wUU-J0-uxT"/>
+                        <outlet property="torchLead" destination="3Be-Ag-6Oq" id="r8i-hh-0jS"/>
+                        <outlet property="torchTrail" destination="QIn-bH-6AC" id="dnh-A2-hml"/>
                         <outletCollection property="buttons" destination="6sJ-Qd-1V2" collectionClass="NSMutableArray" id="hS2-6u-rvi"/>
                         <outletCollection property="buttons" destination="6sJ-Qd-1V2" collectionClass="NSMutableArray" id="K5o-hG-DDW"/>
                         <outletCollection property="buttons" destination="jEV-Bc-LPn" collectionClass="NSMutableArray" id="g8d-5K-ylw"/>

@@ -13,7 +13,7 @@ class MediaManager: NSObject, UIDocumentInteractionControllerDelegate {
     func save (settings: RenderSettings, images: [UIImage], orientation: AVCaptureVideoOrientation, completion: @escaping (URL?) -> ()) {
         let imageAnimator = ImageAnimator(renderSettings: settings)
         let rotatedImages = rotateImages(with: orientation, images: images)
-        imageAnimator.images = rotatedImages.reflect().repeated(times: 8)
+        imageAnimator.images = rotatedImages.reflect().repeated(times: 10)
         imageAnimator.save(completion: completion)
     }
     
@@ -25,12 +25,9 @@ class MediaManager: NSObject, UIDocumentInteractionControllerDelegate {
             angle = CGFloat(-Double.pi/2)
         case .landscapeRight:
             angle = CGFloat(Double.pi/2)
-        default:
-            break
+        default: break
         }
-        for image in images {
-            ret.append(image.rotatedBy(radians: angle))
-        }
+        for image in images { ret.append(image.rotatedBy(radians: angle)) }
         return ret
     }
 }
@@ -38,15 +35,15 @@ class MediaManager: NSObject, UIDocumentInteractionControllerDelegate {
 
 struct RenderSettings {
     
-    init(orientation: AVCaptureVideoOrientation, fps: Int32) {
+    init(orientation: AVCaptureVideoOrientation, fps: Int32, outSize: CGSize) {
         self.fps = fps
         switch (orientation) {
         case .portrait:
-           self.width = UIScreen.main.bounds.width
-           self.height = UIScreen.main.bounds.height
+           self.width = outSize.width
+           self.height = outSize.height
         default:
-            self.width = UIScreen.main.bounds.height
-            self.height = UIScreen.main.bounds.width
+            self.width = outSize.height
+            self.height = outSize.width
             
         }
     }
