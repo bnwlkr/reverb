@@ -138,12 +138,13 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     
     
     @IBAction func clack(_ sender: UIButton) {
-        camera.outputSize = CGSize(width: (camera.latest?.cgImage?.width)!, height: (camera.latest?.cgImage?.height)!)
-        camera.orientationLock = true
-        clack.setImage(clacks[shifter.frames.count+1], for: .normal)
-        let next = camera.latest!
-        top.image = shifter.applyFilter(image1: CIImage(image: next)!, filterName: "CIEdges")
-        delay(0.001, closure: {self.shifter.add(image: next)})
+        if let next = camera.latest {
+            camera.outputSize = CGSize(width: (next.cgImage?.width)!, height: (next.cgImage?.height)!)
+            camera.orientationLock = true
+            clack.setImage(clacks[shifter.frames.count+1], for: .normal)
+            top.image = shifter.topMap(image: CIImage(image: next)!)
+            delay(0.001, closure: {self.shifter.add(image: next)})
+        }
     }
     
     @IBAction func share(_ sender: UIButton) {

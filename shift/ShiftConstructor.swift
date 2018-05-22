@@ -34,13 +34,18 @@ class ShiftConstructor: NSObject {
         return UIImage.animatedImage(with: frames.reflect(), duration: duration)!
     }
     
-    func applyFilter (image1: CIImage, filterName: String) -> UIImage {
-        let filter = CIFilter(name: filterName)
-        filter?.setValue(image1, forKey: kCIInputImageKey)
-        let result = (filter?.outputImage)!
-        let cgImage = context.createCGImage(result, from: result.extent)
+    func topMap (image: CIImage) -> UIImage {
+        let filter1 = CIFilter(name: "CIEdges")
+        let filter2 = CIFilter(name: "CIColorMonochrome")
+        filter1?.setValue(image, forKey: kCIInputImageKey)
+        let result1 = (filter1?.outputImage)!
+        filter2?.setValue(result1, forKey: kCIInputImageKey)
+        filter2?.setValue(CIColor(red: 255, green: 255, blue: 255), forKey: kCIInputColorKey)
+        let result2 = (filter2?.outputImage)!
+        let cgImage = context.createCGImage(result2, from: result2.extent)
         return UIImage(cgImage: cgImage!)
     }
+
 }
 
 protocol ShiftConstructorDelegate {
