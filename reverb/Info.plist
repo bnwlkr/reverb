@@ -26,11 +26,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photos</string>
+	<string>Saving</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>Camera</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UIMainStoryboardFile</key>

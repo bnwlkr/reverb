@@ -16,7 +16,7 @@ class ShiftConstructor: NSObject {
     var delegate: ShiftConstructorDelegate?
     let context = CIContext()
     let frameCount = 3
-    let fps: Int32 = 18
+    let fps: Int32 = 16
     
     func add(image: UIImage) {
         frames.append(image)
