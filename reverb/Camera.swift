@@ -10,6 +10,8 @@ import UIKit
 import AVFoundation
 
 class Camera: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
+    
+    
 
     let session = AVCaptureSession()
     let context = CIContext()

@@ -131,9 +131,18 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
         let when = DispatchTime.now() + delay
         DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
     }
+    
  
     @IBAction func switchCam(_ sender: UIButton) {
         camera.switchCam()
+        switch (camera.currentCam?.position)! {
+        case .front:
+            torch.isHidden=true
+        case .back:
+            torch.isHidden=false
+        default:
+            break
+        }
     }
     
     
