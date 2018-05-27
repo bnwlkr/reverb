@@ -15,7 +15,6 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     @IBOutlet weak var exitTrail: NSLayoutConstraint!
     @IBOutlet weak var torchLead: NSLayoutConstraint!
     @IBOutlet weak var torchTrail: NSLayoutConstraint!
-    @IBOutlet weak var levelView: UIImageView!
     @IBOutlet weak var savingView: UIActivityIndicatorView!
     @IBOutlet weak var focusView: UIImageView!
     @IBOutlet weak var savedView: UIVisualEffectView!
@@ -33,7 +32,6 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     var locked = false
     var torchOn = false
     let clacks = [#imageLiteral(resourceName: "shift0"), #imageLiteral(resourceName: "shift1"), #imageLiteral(resourceName: "shift2"), #imageLiteral(resourceName: "shift3")]
-    var level: Level!
   
     
     override var prefersStatusBarHidden: Bool {
@@ -47,7 +45,6 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        level = Level(imageView: levelView)
         reverber.delegate = self
         camera.delegate = self
         camera.setOrientation()
@@ -62,7 +59,6 @@ class CamViewController: UIViewController , ShiftConstructorDelegate, CameraDele
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        level.start()
         camera.start()
     }
     

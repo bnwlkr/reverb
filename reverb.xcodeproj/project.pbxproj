@@ -16,7 +16,6 @@
 		FFDE86F720A3C2A100D5EEE1 /* CamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDE86F620A3C2A100D5EEE1 /* CamViewController.swift */; };
 		FFDE86FA20A3C2A100D5EEE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDE86F820A3C2A100D5EEE1 /* Main.storyboard */; };
 		FFDE870220A3C2A200D5EEE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDE870020A3C2A200D5EEE1 /* LaunchScreen.storyboard */; };
-		FFF9CCA020AE973400E60797 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF9CC9F20AE973400E60797 /* Level.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +30,6 @@
 		FFDE86F920A3C2A100D5EEE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FFDE870120A3C2A200D5EEE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FFDE870320A3C2A200D5EEE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FFF9CC9F20AE973400E60797 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +56,6 @@
 			children = (
 				FFDE86F420A3C2A100D5EEE1 /* AppDelegate.swift */,
 				FFDE86F620A3C2A100D5EEE1 /* CamViewController.swift */,
-				FFF9CC9F20AE973400E60797 /* Level.swift */,
 				FFD0F10920A4D318000BDFD7 /* ShiftConstructor.swift */,
 				FF4FA76E20A9186A00704107 /* MediaManager.swift */,
 				FFAD11D220A3FF1300E2EBEE /* Camera.swift */,
@@ -144,7 +141,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFDE86F720A3C2A100D5EEE1 /* CamViewController.swift in Sources */,
-				FFF9CCA020AE973400E60797 /* Level.swift in Sources */,
 				FF4FA76320A6E9B700704107 /* Extensions.swift in Sources */,
 				FF4FA76F20A9186A00704107 /* MediaManager.swift in Sources */,
 				FFAD11D320A3FF1300E2EBEE /* Camera.swift in Sources */,

@@ -172,21 +172,12 @@
                                             <action selector="switchCam:" destination="BYZ-38-t0r" eventType="touchDown" id="qMy-r0-yIm"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5U4-Yj-SU5" userLabel="level">
-                                        <rect key="frame" x="84" y="651" width="45" height="4"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="5U4-Yj-SU5" secondAttribute="height" multiplier="45:4" id="asF-5J-7Sh"/>
-                                            <constraint firstAttribute="height" constant="4" id="s5Z-oW-vas"/>
-                                        </constraints>
-                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="oew-hb-zVx" firstAttribute="top" secondItem="zlF-R3-Hbr" secondAttribute="top" constant="17" id="113-TD-PB9"/>
                                     <constraint firstItem="oew-hb-zVx" firstAttribute="leading" secondItem="zlF-R3-Hbr" secondAttribute="leading" priority="250" constant="12" id="3Be-Ag-6Oq"/>
                                     <constraint firstItem="6sJ-Qd-1V2" firstAttribute="centerY" secondItem="jEV-Bc-LPn" secondAttribute="centerY" id="H2b-V3-l2T"/>
-                                    <constraint firstAttribute="bottom" secondItem="5U4-Yj-SU5" secondAttribute="bottom" constant="81" id="KGH-x9-RGC"/>
                                     <constraint firstAttribute="trailing" secondItem="oew-hb-zVx" secondAttribute="trailing" priority="750" constant="12" id="QIn-bH-6AC"/>
-                                    <constraint firstItem="jEV-Bc-LPn" firstAttribute="leading" secondItem="5U4-Yj-SU5" secondAttribute="trailing" constant="40" id="R1K-Ka-h0b"/>
                                     <constraint firstItem="6sJ-Qd-1V2" firstAttribute="leading" secondItem="jEV-Bc-LPn" secondAttribute="trailing" constant="40" id="fSQ-i9-j9a"/>
                                     <constraint firstItem="jEV-Bc-LPn" firstAttribute="centerX" secondItem="zlF-R3-Hbr" secondAttribute="centerX" id="kO3-am-Cox"/>
                                     <constraint firstAttribute="bottom" secondItem="jEV-Bc-LPn" secondAttribute="bottom" constant="45" id="yd4-DA-jke"/>
@@ -221,7 +212,6 @@
                         <outlet property="exitLead" destination="5zR-Lx-rga" id="e09-5R-UR4"/>
                         <outlet property="exitTrail" destination="7aa-nh-9BA" id="8tU-K2-g4H"/>
                         <outlet property="focusView" destination="Yle-Ai-2LY" id="5YL-kP-1bH"/>
-                        <outlet property="levelView" destination="5U4-Yj-SU5" id="5R6-nN-mNj"/>
                         <outlet property="preview" destination="tUm-w8-hpD" id="Ufi-NN-Tct"/>
                         <outlet property="savedView" destination="Rwd-VO-hF5" id="dZb-HY-tSz"/>
                         <outlet property="savingView" destination="H3E-dh-ABS" id="gO2-H5-p5t"/>
