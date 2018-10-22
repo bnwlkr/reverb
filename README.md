@@ -4,5 +4,5 @@
 
 
 <a href="https://itunes.apple.com/th/app/reverb/id1388050047">
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       <img src="preview/itunes-button.png" width=100/>
+     <img src="preview/itunes-button.png" width=100/>
 </a>
